@@ -19,8 +19,8 @@ npm install react-table-npm
 
 ## Examples
 
-Client Side: https://codesandbox.io/s/react-table-npm-example-client-side-wunuk4?file=/src/App.tsx
-Server Side: https://codesandbox.io/s/react-table-npm-example-server-side-qojv3d?file=/src/App.tsx
+- Client Side: https://codesandbox.io/s/react-table-npm-example-client-side-wunuk4?file=/src/App.tsx
+- Server Side: https://codesandbox.io/s/react-table-npm-example-server-side-qojv3d?file=/src/App.tsx
 
 ## Start
 
