@@ -1,0 +1,1 @@
+{"version":3,"file":"useOnResizeTable.d.ts","sourceRoot":"","sources":["../../../../src/components/table/hooks/useOnResizeTable.tsx"],"names":[],"mappings":";AACA,OAAO,EAAE,aAAa,EAAE,MAAM,2BAA2B,CAAC;AAE1D,UAAU,sBAAsB,CAAC,UAAU;IACzC,KAAK,EAAE,KAAK,CAAC,SAAS,CAAC,gBAAgB,CAAC,CAAC;IACzC,OAAO,EAAE,UAAU,EAAE,CAAC;CACvB;AAED,QAAA,MAAM,gBAAgB;;;CAiDrB,CAAC;AAEF,eAAe,gBAAgB,CAAC"}

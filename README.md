@@ -1,46 +1,156 @@
-# Getting Started with Create React App
+## Features
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- Build easy high performance react tables
+- Server and Client Side rendering
+- Filter and Sort Data
+- Select Rows and Copy (multi)
+- Resizable columns
+- Typescript support
 
-## Available Scripts
+## Preview
 
-In the project directory, you can run:
+https://react-hook-tables.vercel.app
 
-### `npm start`
+## Install
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```
+npm install react-table-npm
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Examples
 
-### `npm test`
+Client Side: https://codesandbox.io/s/react-table-npm-example-client-side-wunuk4?file=/src/App.tsx
+Server Side: https://codesandbox.io/s/react-table-npm-example-server-side-qojv3d?file=/src/App.tsx
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Start
 
-### `npm run build`
+```
+import { Table } from "react-table-npm"
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+type Width = {
+  minWidth?: number;
+  defaultWidth?: string | number;
+};
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+type Column = {
+  id: string;
+  label: string;
+  filter?: string;
+  sort?: boolean;
+  width?: Width;
+};
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+type Data = {
+  id: string;
+  name: string;
+  age: number;
+  state: string;
+};
 
-### `npm run eject`
+const columns: Column[] = [
+  {
+    id: "name",
+    label: "Name",
+    sort: true,
+    width: { minWidth: 300, defaultWidth: "1fr" },
+  },
+  {
+    id: "age",
+    label: "Age",
+    sort: true,
+    width: { defaultWidth: 200 },
+  },
+  {
+    id: "state",
+    label: "State",
+    sort: true,
+    width: { minWidth: 300, defaultWidth: 400 },
+  },
+];
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+const users = [
+  {
+    "id": "62e2dd905e37187e20fd4a13",
+    "name": "Mcintyre Forbes",
+    "age": 69,
+    "state": "Idaho"
+  },
+  {
+    "id": "62e2dd90c7d21f4a03638d4f",
+    "name": "Verna Berger",
+    "age": 18,
+    "state": "Louisiana"
+  },
+  {
+    "id": "62e2dd90edc01768932b2da7",
+    "name": "Gladys Dawson",
+    "age": 100,
+    "state": "Federated States Of Micronesia"
+  }
+]
+const data: Data[] = users;
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+function App() {
+  const handleColumnKeyExtractor = (item: Column) => item.id;
+  const handleRenderColumn = (item: Column) => item.label;
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+  const handleDataKeyExtractor = (item: Data) => {
+    return `${item.name}-${item.age}-${item.state}`;
+  };
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+  const handleRenderData = (item: Data, column: Column) => {
+    return (
+      <td key={`${item.name}-${column.id}`}>
+        <span>{item[column.id as keyof Data]}</span>
+      </td>
+    );
+  };
 
-## Learn More
+  // only for server side
+  const handleFetchDataOnPagination = async (
+    page: number,
+    limit: number,
+    filter: any
+  ) => {
+    return new Promise((resolve) =>
+      setTimeout(
+        () =>
+          resolve({
+            data: [...users]
+              .sort((a: any, b: any) => {
+                if (filter?.sort?.sortBy?.value === "asc") {
+                  return a[filter?.sort?.sortBy?.id] >
+                    b[filter?.sort?.sortBy?.id]
+                    ? 1
+                    : -1;
+                }
+                if (filter?.sort?.sortBy?.value === "desc") {
+                  return a[filter?.sort?.sortBy?.id] <
+                    b[filter?.sort?.sortBy?.id]
+                    ? 1
+                    : -1;
+                }
+                return 0;
+              })
+              .slice((page - 1) * limit, page * limit),
+            hasNextPage: users.length > page * limit,
+          }),
+        1000
+      )
+    );
+  };
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+  return (
+    <Table
+      columns={columns}
+      columnKeyExtractor={handleColumnKeyExtractor}
+      renderColumnItem={handleRenderColumn}
+      data={data}
+      dataKeyExtractor={handleDataKeyExtractor}
+      renderData={handleRenderData}
+      // isServerSide={true} only for server side
+      // fetchDataOnPagination={handleFetchDataOnPagination} only for server side
+    />
+  );
+}
+```
