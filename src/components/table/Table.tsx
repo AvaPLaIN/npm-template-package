@@ -6,9 +6,9 @@ import sortDesc from "../../utils/sorts/desc";
 import ColumnItem from "../column-item/ColumnItem";
 import ContextMenu from "../context-menu/ContextMenu";
 import Pagination from "../pagination/Pagination";
-import useOnFilter, { FilterType } from "./hooks/useOnFilter";
 import useOnResizeTable from "./hooks/useOnResizeTable";
 import useOnSelect from "./hooks/useOnSelect";
+import useOnFilter, { SortType } from "./hooks/useOnSort";
 import usePagination from "./hooks/usePagination";
 import TableWrapper, { Row, TableContainer } from "./Table.styles";
 import createColumnRefs from "./utils/createColumnRefs";
@@ -27,7 +27,7 @@ interface ITableProps<ColumnType, DataType> {
   fetchDataOnPagination?: (
     page: number,
     limit: number,
-    filter: FilterType
+    sort: SortType
   ) => Promise<any>;
 }
 
@@ -73,7 +73,7 @@ const Table = <ColumnType extends Column, DataType extends { id: string }>({
     });
   });
 
-  const { filter, addSort, removeSort } = useOnFilter();
+  const { sort, addSort, removeSort } = useOnFilter();
 
   const tableRef = useRef<HTMLTableElement>(null);
 
@@ -88,7 +88,7 @@ const Table = <ColumnType extends Column, DataType extends { id: string }>({
     pageData,
     onChangePage,
   } = usePagination({
-    filter,
+    sort,
     data: sortedData,
     limit: 10,
     isServerSide,
@@ -161,7 +161,7 @@ const Table = <ColumnType extends Column, DataType extends { id: string }>({
                   renderColumnItem={renderColumnItem}
                   resizable={resizable}
                   onSort={handleOnSort}
-                  sort={filter.sort || { isSort: false }}
+                  sort={sort || { isSort: false }}
                   setActiveIndexOnResize={handleSetActiveIndexOnResize}
                 />
               ))}

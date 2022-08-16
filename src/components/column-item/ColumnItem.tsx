@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import useOnClickOutside from "../../hooks/useOnClickOutside";
 import ColumnMenu from "../column-menu/ColumnMenu";
-import { SortType } from "../table/hooks/useOnFilter";
+import { SortType } from "../table/hooks/useOnSort";
 import { Column } from "../table/Table";
 import { ColumnRefType } from "../table/utils/createColumnRefs";
 import ResizeBar from "./ColumnItem.styles";
