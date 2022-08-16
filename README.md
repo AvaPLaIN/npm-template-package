@@ -58,6 +58,7 @@ const columns: Column[] = [
     id: "age",
     label: "Age",
     sort: true,
+    filter: true,
     width: { defaultWidth: 200 },
   },
   {
@@ -106,40 +107,6 @@ function App() {
     );
   };
 
-  // only for server side
-  const handleFetchDataOnPagination = async (
-    page: number,
-    limit: number,
-    filter: any
-  ) => {
-    return new Promise((resolve) =>
-      setTimeout(
-        () =>
-          resolve({
-            data: [...users]
-              .sort((a: any, b: any) => {
-                if (filter?.sort?.sortBy?.value === "asc") {
-                  return a[filter?.sort?.sortBy?.id] >
-                    b[filter?.sort?.sortBy?.id]
-                    ? 1
-                    : -1;
-                }
-                if (filter?.sort?.sortBy?.value === "desc") {
-                  return a[filter?.sort?.sortBy?.id] <
-                    b[filter?.sort?.sortBy?.id]
-                    ? 1
-                    : -1;
-                }
-                return 0;
-              })
-              .slice((page - 1) * limit, page * limit),
-            hasNextPage: users.length > page * limit,
-          }),
-        1000
-      )
-    );
-  };
-
   return (
     <Table
       columns={columns}
@@ -148,9 +115,15 @@ function App() {
       data={data}
       dataKeyExtractor={handleDataKeyExtractor}
       renderData={handleRenderData}
-      // isServerSide={true} only for server side
-      // fetchDataOnPagination={handleFetchDataOnPagination} only for server side
+      selectable={true}
+      contextMenu={true}
     />
   );
 }
 ```
+
+## Table Props
+
+- resizable: boolean
+- contextMenu: boolean
+- selectable: boolean
