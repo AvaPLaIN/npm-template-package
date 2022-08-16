@@ -127,3 +127,55 @@ function App() {
 - resizable: boolean
 - contextMenu: boolean
 - selectable: boolean
+
+## Server Side
+
+- isServerSide: true
+- fetchDataOnPagination: callback
+
+### Extend Example With Server Side
+
+```
+const handleFetchDataOnPagination = async (
+  page: number,
+  limit: number,
+  filter: any
+) => {
+  return new Promise((resolve) =>
+    setTimeout(
+      () =>
+        resolve({
+          data: [...users]
+            .sort((a: any, b: any) => {
+              if (filter?.sort?.sortBy?.value === "asc") {
+                return a[filter?.sort?.sortBy?.id] > b[filter?.sort?.sortBy?.id]
+                  ? 1
+                  : -1;
+              }
+              if (filter?.sort?.sortBy?.value === "desc") {
+                return a[filter?.sort?.sortBy?.id] < b[filter?.sort?.sortBy?.id]
+                  ? 1
+                  : -1;
+              }
+              return 0;
+            })
+            .slice((page - 1) * limit, page * limit),
+          hasNextPage: users.length > page * limit,
+        }),
+      1000
+    )
+  );
+};
+
+<Table
+  columns={columns}
+  columnKeyExtractor={handleColumnKeyExtractor}
+  renderColumnItem={handleRenderColumn}
+  data={data}
+  dataKeyExtractor={handleDataKeyExtractor}
+  renderData={handleRenderData}
+  selectable={true}
+  contextMenu={true}
+  isServerSide={true}
+/>
+```
