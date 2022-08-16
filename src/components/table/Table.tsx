@@ -21,6 +21,7 @@ interface ITableProps<ColumnType, DataType> {
   dataKeyExtractor: (item: DataType) => string;
   renderData: (item: DataType, column: ColumnType) => React.ReactNode;
   isServerSide?: boolean;
+  selectable?: boolean;
   fetchDataOnPagination?: (
     page: number,
     limit: number,
@@ -48,6 +49,7 @@ const Table = <ColumnType extends Column, DataType extends { id: string }>({
   data,
   dataKeyExtractor,
   renderData,
+  selectable = false,
   isServerSide = false,
   fetchDataOnPagination,
 }: ITableProps<ColumnType, DataType>) => {
@@ -140,6 +142,10 @@ const Table = <ColumnType extends Column, DataType extends { id: string }>({
     handleOnCloseContextMenu();
   };
 
+  const handleOnSelect = (event: React.MouseEvent<HTMLTableRowElement>, item: DataType) => {
+    onSelect(event, item)
+  }
+
   return (
     <>
       <GlobalStyles />
@@ -176,9 +182,7 @@ const Table = <ColumnType extends Column, DataType extends { id: string }>({
               : pageData!.map((item) => (
                   <Row
                     key={dataKeyExtractor(item)}
-                    onClick={(event: React.MouseEvent<HTMLTableRowElement>) =>
-                      onSelect(event, item)
-                    }
+                    onClick={selectable ? (event: React.MouseEvent<HTMLTableRowElement>) => handleOnSelect(event, item) : null}
                     onContextMenu={(
                       event: React.MouseEvent<HTMLTableRowElement>
                     ) => handleOnContextMenu(event, item)}

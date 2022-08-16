@@ -1,0 +1,20 @@
+[
+  {
+    "id": "name",
+    "label": "Name",
+    "sort": true,
+    "width": { "minWidth": 300, "defaultWidth": "1fr" }
+  },
+  {
+    "id": "age",
+    "label": "Age",
+    "sort": true,
+    "width": { "defaultWidth": 200 }
+  },
+  {
+    "id": "state",
+    "label": "State",
+    "sort": true,
+    "width": { "minWidth": 300, "defaultWidth": 400 }
+  }
+]
