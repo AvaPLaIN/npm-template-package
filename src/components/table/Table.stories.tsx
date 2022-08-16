@@ -97,3 +97,16 @@ SelectableRows.args = {
   ...defaultArgs,
   selectable: true,
 };
+
+export const WithContextMenu = Template.bind({});
+WithContextMenu.args = {
+  ...defaultArgs,
+  selectable: true,
+  contextMenu: true,
+};
+
+export const WithoutResize = Template.bind({});
+WithoutResize.args = {
+  ...defaultArgs,
+  resizable: false,
+};

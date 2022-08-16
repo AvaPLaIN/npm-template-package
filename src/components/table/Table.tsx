@@ -22,6 +22,8 @@ interface ITableProps<ColumnType, DataType> {
   renderData: (item: DataType, column: ColumnType) => React.ReactNode;
   isServerSide?: boolean;
   selectable?: boolean;
+  resizable?: boolean;
+  contextMenu?: boolean;
   fetchDataOnPagination?: (
     page: number,
     limit: number,
@@ -50,6 +52,8 @@ const Table = <ColumnType extends Column, DataType extends { id: string }>({
   dataKeyExtractor,
   renderData,
   selectable = false,
+  contextMenu = false,
+  resizable = true,
   isServerSide = false,
   fetchDataOnPagination,
 }: ITableProps<ColumnType, DataType>) => {
@@ -142,10 +146,6 @@ const Table = <ColumnType extends Column, DataType extends { id: string }>({
     handleOnCloseContextMenu();
   };
 
-  const handleOnSelect = (event: React.MouseEvent<HTMLTableRowElement>, item: DataType) => {
-    onSelect(event, item)
-  }
-
   return (
     <>
       <GlobalStyles />
@@ -159,6 +159,7 @@ const Table = <ColumnType extends Column, DataType extends { id: string }>({
                   index={index}
                   column={column}
                   renderColumnItem={renderColumnItem}
+                  resizable={resizable}
                   onSort={handleOnSort}
                   sort={filter.sort || { isSort: false }}
                   setActiveIndexOnResize={handleSetActiveIndexOnResize}
@@ -182,10 +183,18 @@ const Table = <ColumnType extends Column, DataType extends { id: string }>({
               : pageData!.map((item) => (
                   <Row
                     key={dataKeyExtractor(item)}
-                    onClick={selectable ? (event: React.MouseEvent<HTMLTableRowElement>) => handleOnSelect(event, item) : null}
-                    onContextMenu={(
-                      event: React.MouseEvent<HTMLTableRowElement>
-                    ) => handleOnContextMenu(event, item)}
+                    onClick={
+                      selectable
+                        ? (event: React.MouseEvent<HTMLTableRowElement>) =>
+                            onSelect(event, item)
+                        : null
+                    }
+                    onContextMenu={
+                      contextMenu
+                        ? (event: React.MouseEvent<HTMLTableRowElement>) =>
+                            handleOnContextMenu(event, item)
+                        : null
+                    }
                     selected={selectedRows.some(
                       (selectedRow) => selectedRow.id === item.id
                     )}

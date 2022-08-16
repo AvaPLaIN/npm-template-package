@@ -5,6 +5,7 @@ import ColumnMenu from "../column-menu/ColumnMenu";
 import { SortType } from "../table/hooks/useOnFilter";
 import { Column } from "../table/Table";
 import { ColumnRefType } from "../table/utils/createColumnRefs";
+import ResizeBar from "./ColumnItem.styles";
 
 interface IColumnProps<ColumnType> {
   column: ColumnType;
@@ -12,6 +13,7 @@ interface IColumnProps<ColumnType> {
   onSort: (column: string, type: string) => void;
   sort: SortType;
   index: number;
+  resizable: boolean;
   setActiveIndexOnResize: (index: number) => void;
 }
 
@@ -21,6 +23,7 @@ const ColumnItem = <ColumnType extends Column>({
   onSort,
   sort,
   index,
+  resizable,
   setActiveIndexOnResize,
 }: IColumnProps<ColumnType & ColumnRefType>) => {
   const [isColumnMenuOpen, setIsColumnMenuOpen] = useState(false);
@@ -69,10 +72,10 @@ const ColumnItem = <ColumnType extends Column>({
       <div className="filter" onClick={handleOnClickFilter}>
         <AiOutlineMenu />
       </div>
-      <div
+      <ResizeBar
+        resizable={resizable}
         style={{ height: "50%" }}
-        onMouseDown={() => handleOnMouseDown(index)}
-        className="resize-bar"
+        onMouseDown={resizable ? () => handleOnMouseDown(index) : undefined}
       />
       <ColumnMenu ref={columnMenuRef} isOpen={isColumnMenuOpen} />
     </th>

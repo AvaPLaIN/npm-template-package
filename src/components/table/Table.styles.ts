@@ -99,19 +99,6 @@ const TableWrapper = styled.table<TableProps>`
     overflow: hidden;
     display: block;
   }
-
-  .resize-bar {
-    display: block;
-    position: absolute;
-    cursor: col-resize;
-    width: 7px;
-    right: 0px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 1;
-    border-right: 1px solid transparent;
-    border-color: #ccc;
-  }
 `;
 
 interface IRowProps {
