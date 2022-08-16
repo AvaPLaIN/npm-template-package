@@ -69,12 +69,13 @@ const ColumnItem = <ColumnType extends Column>({
           </button>
         )}
       </div>
-      <div className="filter" onClick={handleOnClickFilter}>
-        <AiOutlineMenu />
-      </div>
+      {column.filter && (
+        <div className="filter" onClick={handleOnClickFilter}>
+          <AiOutlineMenu />
+        </div>
+      )}
       <ResizeBar
         resizable={resizable}
-        style={{ height: "50%" }}
         onMouseDown={resizable ? () => handleOnMouseDown(index) : undefined}
       />
       <ColumnMenu ref={columnMenuRef} isOpen={isColumnMenuOpen} />

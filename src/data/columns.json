@@ -3,6 +3,7 @@
     "id": "name",
     "label": "Name",
     "sort": true,
+    "filter": true,
     "width": { "minWidth": 300, "defaultWidth": "1fr" }
   },
   {

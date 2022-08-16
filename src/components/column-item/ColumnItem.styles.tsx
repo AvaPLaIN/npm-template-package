@@ -9,6 +9,7 @@ const ResizeBar = styled.div<IResizeBarProps>`
   position: absolute;
   cursor: ${({ resizable }) => (resizable ? "col-resize" : "default")};
   width: 7px;
+  height: 50%;
   right: 0px;
   top: 50%;
   transform: translateY(-50%);

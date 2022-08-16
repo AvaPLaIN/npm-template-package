@@ -92,6 +92,16 @@ CustomDataRow.args = {
   renderData: handleRenderDataWithCustomComponent,
 };
 
+export const ColumnSorting = Template.bind({});
+ColumnSorting.args = {
+  ...defaultArgs,
+};
+
+export const ColumnFiltering = Template.bind({});
+ColumnFiltering.args = {
+  ...defaultArgs,
+};
+
 export const SelectableRows = Template.bind({});
 SelectableRows.args = {
   ...defaultArgs,
