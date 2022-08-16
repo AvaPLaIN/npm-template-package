@@ -6,9 +6,10 @@ import sortDesc from "../../utils/sorts/desc";
 import ColumnItem from "../column-item/ColumnItem";
 import ContextMenu from "../context-menu/ContextMenu";
 import Pagination from "../pagination/Pagination";
+import useOnFilter from "./hooks/useOnFilter";
 import useOnResizeTable from "./hooks/useOnResizeTable";
 import useOnSelect from "./hooks/useOnSelect";
-import useOnFilter, { SortType } from "./hooks/useOnSort";
+import useOnSort, { SortType } from "./hooks/useOnSort";
 import usePagination from "./hooks/usePagination";
 import TableWrapper, { Row, TableContainer } from "./Table.styles";
 import createColumnRefs from "./utils/createColumnRefs";
@@ -73,7 +74,9 @@ const Table = <ColumnType extends Column, DataType extends { id: string }>({
     });
   });
 
-  const { sort, addSort, removeSort } = useOnFilter();
+  const { sort, addSort, removeSort } = useOnSort();
+  const { filters, addFilter, clearFilter, clearAllColumnFilters } =
+    useOnFilter();
 
   const tableRef = useRef<HTMLTableElement>(null);
 
@@ -162,6 +165,12 @@ const Table = <ColumnType extends Column, DataType extends { id: string }>({
                   resizable={resizable}
                   onSort={handleOnSort}
                   sort={sort || { isSort: false }}
+                  filters={filters.filter(
+                    (filter) => filter.columnId === column.id
+                  )}
+                  addFilter={addFilter}
+                  clearFilter={clearFilter}
+                  clearAllColumnFilters={clearAllColumnFilters}
                   setActiveIndexOnResize={handleSetActiveIndexOnResize}
                 />
               ))}

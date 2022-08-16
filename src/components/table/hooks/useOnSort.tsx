@@ -13,25 +13,23 @@ const useOnSort = () => {
     isSort: false,
   });
 
-  const handleAddFilter = (id: string, value: string) => {
+  const handleAddSort = (id: string, value: string) => {
     setSort({
-      ...sort,
       isSort: true,
       sortBy: { id, value },
     });
   };
 
-  const handleRemoveFilter = () => {
+  const handleRemoveSort = () => {
     setSort({
-      ...sort,
       isSort: false,
     });
   };
 
   return {
     sort,
-    addSort: handleAddFilter,
-    removeSort: handleRemoveFilter,
+    addSort: handleAddSort,
+    removeSort: handleRemoveSort,
   };
 };
 

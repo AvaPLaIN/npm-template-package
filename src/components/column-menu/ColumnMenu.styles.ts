@@ -8,11 +8,17 @@ const ColumnMenuContainer = styled.div`
   background-color: #ebe9e6;
   border: 1px solid #ccc;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 
   .filter-header {
     display: flex;
     align-items: center;
     gap: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid black;
 
     .add-filter-button {
     }
@@ -26,12 +32,36 @@ const ColumnMenuContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 2rem;
+    gap: 0.5rem;
+
+    .filter-label {
+      text-align: right;
+      width: 6rem;
+      font-size: 12px;
+    }
 
     .filter-item {
+      padding: 0.5rem 0;
       display: flex;
       align-items: center;
       gap: 1rem;
+
+      &:hover {
+        .delete-filter {
+          opacity: 1;
+        }
+      }
+
+      .delete-filter {
+        cursor: pointer;
+        width: 2rem;
+        height: 2rem;
+        opacity: 0;
+        color: red;
+        border: none;
+        background-color: transparent;
+        font-size: 1.6rem;
+      }
     }
   }
 `;
