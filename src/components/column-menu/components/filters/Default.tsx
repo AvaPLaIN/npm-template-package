@@ -3,7 +3,7 @@ import { FilterType } from "../../../table/hooks/useOnFilter";
 
 interface IContainsProps {
   filter: FilterType;
-  updateFilter: (id: number, filter: string) => void;
+  updateFilter: (id: string, filter: string) => void;
 }
 
 const Contains = ({ filter, updateFilter }: IContainsProps) => {

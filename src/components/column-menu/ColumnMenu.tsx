@@ -10,8 +10,8 @@ interface IColumnMenuProps {
   isOpen: boolean;
   filters: FilterType[];
   addFilter: (columnId: string, filter: string) => void;
-  updateFilter: (id: number, filter: string) => void;
-  clearFilter: (id: number) => void;
+  updateFilter: (id: string, filter: string) => void;
+  clearFilter: (id: string) => void;
 }
 
 const filterDisplayNames = {

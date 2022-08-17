@@ -16,8 +16,8 @@ interface IColumnProps<ColumnType> {
   sort: SortType;
   filters: FilterType[];
   addFilter: (columnId: string, filter: string) => void;
-  updateFilter: (id: number, filter: string) => void;
-  clearFilter: (id: number) => void;
+  updateFilter: (id: string, filter: string) => void;
+  clearFilter: (id: string) => void;
   clearAllColumnFilters: (columnId: string) => void;
   index: number;
   resizable: boolean;

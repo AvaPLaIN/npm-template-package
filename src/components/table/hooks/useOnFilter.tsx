@@ -1,7 +1,8 @@
 import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 export type FilterType = {
-  id: number;
+  id: string;
   columnId: string;
   filter: string;
   value: string;
@@ -13,11 +14,11 @@ const useOnFilter = () => {
   const handleAddFilter = (columnId: string, filterValue: string) => {
     setFilters([
       ...filters,
-      { id: filters.length, columnId, filter: filterValue, value: "" },
+      { id: uuidv4(), columnId, filter: filterValue, value: "" },
     ]);
   };
 
-  const handleUpdateFilter = (id: number, value: string) => {
+  const handleUpdateFilter = (id: string, value: string) => {
     setFilters(
       filters.map((filter) => {
         if (filter.id === id) {
@@ -28,7 +29,7 @@ const useOnFilter = () => {
     );
   };
 
-  const handleClearFilter = (id: number) => {
+  const handleClearFilter = (id: string) => {
     setFilters(filters.filter(({ id: filterId }) => filterId !== id));
   };
 
