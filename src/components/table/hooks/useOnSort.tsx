@@ -14,6 +14,12 @@ const useOnSort = () => {
   });
 
   const handleAddSort = (id: string, value: string) => {
+    if (value === "default") {
+      return setSort({
+        isSort: false,
+      });
+    }
+
     setSort({
       isSort: true,
       sortBy: { id, value },

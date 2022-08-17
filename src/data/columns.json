@@ -10,12 +10,14 @@
     "id": "age",
     "label": "Age",
     "sort": true,
+    "filter": true,
     "width": { "defaultWidth": 200 }
   },
   {
     "id": "state",
     "label": "State",
     "sort": true,
+    "filter": true,
     "width": { "minWidth": 300, "defaultWidth": 400 }
   }
 ]

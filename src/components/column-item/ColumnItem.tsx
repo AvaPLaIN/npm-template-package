@@ -12,7 +12,7 @@ import ResizeBar from "./ColumnItem.styles";
 interface IColumnProps<ColumnType> {
   column: ColumnType;
   renderColumnItem: (item: ColumnType) => React.ReactNode;
-  onSort: (column: string, type: string) => void;
+  addSort: (id: string, value: string) => void;
   sort: SortType;
   filters: FilterType[];
   addFilter: (columnId: string, filter: string) => void;
@@ -27,7 +27,7 @@ interface IColumnProps<ColumnType> {
 const ColumnItem = <ColumnType extends Column>({
   column,
   renderColumnItem,
-  onSort,
+  addSort,
   sort,
   filters,
   addFilter,
@@ -57,7 +57,7 @@ const ColumnItem = <ColumnType extends Column>({
     if (sortCount % 3 === 1) type = "desc";
 
     setSortCount((sortCount % 3) + 1);
-    onSort(id, type);
+    addSort(id, type);
   };
 
   const handleOnMouseDown = (index: number) => {

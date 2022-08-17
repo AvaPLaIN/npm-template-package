@@ -14,7 +14,6 @@ const ContextMenu = <ItemType extends { id: string }>(
   ref: React.ForwardedRef<HTMLDivElement>
 ) => {
   const { isOpen, mousePosition, item, onCopy, tableRef } = props;
-  console.log("item", item);
   if (!isOpen) return null;
 
   return (

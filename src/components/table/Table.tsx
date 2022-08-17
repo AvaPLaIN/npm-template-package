@@ -1,12 +1,18 @@
-import React, { useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { GlobalStyles } from "../../config/global.styles";
 import useOnClickOutside from "../../hooks/useOnClickOutside";
+import filterByContains from "../../utils/filters/contains";
+import filterByEndsWith from "../../utils/filters/endsWith";
+import filterByEquals from "../../utils/filters/equals";
+import filterByNotContains from "../../utils/filters/notContains";
+import filterByNotEqual from "../../utils/filters/notEqual";
+import filterByStartsWith from "../../utils/filters/startsWith";
 import sortAsc from "../../utils/sorts/asc";
 import sortDesc from "../../utils/sorts/desc";
 import ColumnItem from "../column-item/ColumnItem";
 import ContextMenu from "../context-menu/ContextMenu";
 import Pagination from "../pagination/Pagination";
-import useOnFilter from "./hooks/useOnFilter";
+import useOnFilter, { FilterType } from "./hooks/useOnFilter";
 import useOnResizeTable from "./hooks/useOnResizeTable";
 import useOnSelect from "./hooks/useOnSelect";
 import useOnSort, { SortType } from "./hooks/useOnSort";
@@ -45,7 +51,10 @@ export type Column = {
   width?: Width;
 };
 
-const Table = <ColumnType extends Column, DataType extends { id: string }>({
+const Table = <
+  ColumnType extends Column,
+  DataType extends { id: string; [key: string]: any }
+>({
   columns,
   columnKeyExtractor,
   renderColumnItem,
@@ -74,7 +83,7 @@ const Table = <ColumnType extends Column, DataType extends { id: string }>({
     });
   });
 
-  const { sort, addSort, removeSort } = useOnSort();
+  const { sort, addSort } = useOnSort();
   const {
     filters,
     addFilter,
@@ -109,16 +118,62 @@ const Table = <ColumnType extends Column, DataType extends { id: string }>({
 
   const { selectedRows, onSelect } = useOnSelect<DataType>();
 
-  const handleOnSort = (column: string, type: string) => {
-    if (type === "default") {
-      removeSort();
+  const handleOnSort = useCallback(
+    (column: string, type: string) => {
+      if (type === "default") {
+        return data;
+      }
+      if (type === "asc") return sortAsc(data!, column);
+      if (type === "desc") return sortDesc(data!, column);
+    },
+    [data]
+  );
+
+  const handleOnFilter = useCallback(
+    (array: DataType[], filter: FilterType) => {
+      if (filter.filter === "contains") {
+        return filterByContains(array, filter.value, filter.columnId);
+      }
+      if (filter.filter === "notContains" && filter.value.length > 0) {
+        // ! ERROR
+        return filterByNotContains(array, filter.value, filter.columnId);
+      }
+      if (filter.filter === "equals" && filter.value.length > 0) {
+        return filterByEquals(array, filter.value, filter.columnId);
+      }
+      if (filter.filter === "notEqual" && filter.value.length > 0) {
+        // ! ERROR
+        return filterByNotEqual(array, filter.value, filter.columnId);
+      }
+      if (filter.filter === "startsWith" && filter.value.length > 0) {
+        return filterByStartsWith(array, filter.value, filter.columnId);
+      }
+      if (filter.filter === "endsWith" && filter.value.length > 0) {
+        return filterByEndsWith(array, filter.value, filter.columnId);
+      }
+      return array;
+    },
+    []
+  );
+
+  useEffect(() => {
+    if (filters.length <= 0 && !sort.isSort) {
       setSortedData(data || []);
       return;
     }
-    addSort(column, type);
-    if (type === "asc") setSortedData(sortAsc(sortedData, column));
-    if (type === "desc") setSortedData(sortDesc(sortedData, column));
-  };
+
+    // sort dataset
+    let sortedData = sort.sortBy
+      ? handleOnSort(sort.sortBy.id, sort.sortBy.value)
+      : data;
+
+    // filter dataset
+    filters.forEach((filter) => {
+      sortedData = handleOnFilter(sortedData || [], filter);
+    });
+
+    setSortedData(sortedData || []);
+  }, [data, filters, handleOnFilter, handleOnSort, sort]);
 
   const handleSetActiveIndexOnResize = (index: number) => {
     setResizeIndex(index);
@@ -168,7 +223,7 @@ const Table = <ColumnType extends Column, DataType extends { id: string }>({
                   column={column}
                   renderColumnItem={renderColumnItem}
                   resizable={resizable}
-                  onSort={handleOnSort}
+                  addSort={addSort}
                   sort={sort || { isSort: false }}
                   filters={filters.filter(
                     (filter) => filter.columnId === column.id

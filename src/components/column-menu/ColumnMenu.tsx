@@ -97,7 +97,7 @@ const ColumnMenu = forwardRef<HTMLDivElement, IColumnMenuProps>(
               ];
 
             return (
-              <div className="filter-item">
+              <div key={filter.id} className="filter-item">
                 <button
                   className="delete-filter"
                   onClick={() => clearFilter(filter.id)}
