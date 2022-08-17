@@ -26,16 +26,9 @@ const useOnSort = () => {
     });
   };
 
-  const handleRemoveSort = () => {
-    setSort({
-      isSort: false,
-    });
-  };
-
   return {
     sort,
     addSort: handleAddSort,
-    removeSort: handleRemoveSort,
   };
 };
 
