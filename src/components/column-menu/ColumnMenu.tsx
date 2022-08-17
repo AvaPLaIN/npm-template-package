@@ -1,5 +1,6 @@
 import React, { forwardRef, useRef } from "react";
-import { MdDelete } from "react-icons/md";
+import { CgAddR } from "react-icons/cg";
+import { MdDeleteOutline } from "react-icons/md";
 import { FilterType } from "../table/hooks/useOnFilter";
 import ColumnMenuContainer from "./ColumnMenu.styles";
 import Default from "./components/filters/Default";
@@ -9,6 +10,8 @@ interface IColumnMenuProps {
   isOpen: boolean;
   filters: FilterType[];
   addFilter: (columnId: string, filter: string) => void;
+  updateFilter: (id: number, filter: string) => void;
+  clearFilter: (id: number) => void;
 }
 
 const filterDisplayNames = {
@@ -47,7 +50,8 @@ const filterDisplayNames = {
 
 const ColumnMenu = forwardRef<HTMLDivElement, IColumnMenuProps>(
   (props, menuRef) => {
-    const { columnId, filters, isOpen, addFilter } = props;
+    const { columnId, filters, isOpen, addFilter, updateFilter, clearFilter } =
+      props;
 
     const selectRef = useRef<HTMLSelectElement>(null);
 
@@ -62,7 +66,7 @@ const ColumnMenu = forwardRef<HTMLDivElement, IColumnMenuProps>(
       <ColumnMenuContainer ref={menuRef}>
         <div className="filter-header">
           <button className="add-filter-button" onClick={handleAddFilter}>
-            Add
+            <CgAddR />
           </button>
           <select
             ref={selectRef}
@@ -94,11 +98,14 @@ const ColumnMenu = forwardRef<HTMLDivElement, IColumnMenuProps>(
 
             return (
               <div className="filter-item">
-                <button className="delete-filter">
-                  <MdDelete />
+                <button
+                  className="delete-filter"
+                  onClick={() => clearFilter(filter.id)}
+                >
+                  <MdDeleteOutline />
                 </button>
                 <span className="filter-label">{label}</span>
-                <Component />
+                <Component filter={filter} updateFilter={updateFilter} />
               </div>
             );
           })}

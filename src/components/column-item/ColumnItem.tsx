@@ -16,7 +16,8 @@ interface IColumnProps<ColumnType> {
   sort: SortType;
   filters: FilterType[];
   addFilter: (columnId: string, filter: string) => void;
-  clearFilter: (columnId: string) => void;
+  updateFilter: (id: number, filter: string) => void;
+  clearFilter: (id: number) => void;
   clearAllColumnFilters: (columnId: string) => void;
   index: number;
   resizable: boolean;
@@ -30,6 +31,7 @@ const ColumnItem = <ColumnType extends Column>({
   sort,
   filters,
   addFilter,
+  updateFilter,
   clearFilter,
   clearAllColumnFilters,
   index,
@@ -93,6 +95,8 @@ const ColumnItem = <ColumnType extends Column>({
         columnId={column.id}
         filters={filters}
         addFilter={addFilter}
+        updateFilter={updateFilter}
+        clearFilter={clearFilter}
         ref={columnMenuRef}
         isOpen={isColumnMenuOpen}
       />

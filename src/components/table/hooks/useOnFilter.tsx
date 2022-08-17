@@ -1,19 +1,35 @@
 import { useState } from "react";
 
 export type FilterType = {
+  id: number;
   columnId: string;
   filter: string;
+  value: string;
 };
 
 const useOnFilter = () => {
   const [filters, setFilters] = useState<FilterType[]>([]);
 
   const handleAddFilter = (columnId: string, filterValue: string) => {
-    setFilters([...filters, { columnId, filter: filterValue }]);
+    setFilters([
+      ...filters,
+      { id: filters.length, columnId, filter: filterValue, value: "" },
+    ]);
   };
 
-  const handleClearFilter = (columnId: string) => {
-    setFilters(filters.filter(({ columnId: id }) => id !== columnId));
+  const handleUpdateFilter = (id: number, value: string) => {
+    setFilters(
+      filters.map((filter) => {
+        if (filter.id === id) {
+          return { ...filter, value };
+        }
+        return filter;
+      })
+    );
+  };
+
+  const handleClearFilter = (id: number) => {
+    setFilters(filters.filter(({ id: filterId }) => filterId !== id));
   };
 
   const handleClearAllColumnFilters = (columnId: string) => {
@@ -30,6 +46,7 @@ const useOnFilter = () => {
     clearFilter: handleClearFilter,
     clearAllColumnFilters: handleClearAllColumnFilters,
     clearAllFilters: handleClearAllFilters,
+    updateFilter: handleUpdateFilter,
   };
 };
 

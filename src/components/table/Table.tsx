@@ -75,8 +75,13 @@ const Table = <ColumnType extends Column, DataType extends { id: string }>({
   });
 
   const { sort, addSort, removeSort } = useOnSort();
-  const { filters, addFilter, clearFilter, clearAllColumnFilters } =
-    useOnFilter();
+  const {
+    filters,
+    addFilter,
+    updateFilter,
+    clearFilter,
+    clearAllColumnFilters,
+  } = useOnFilter();
 
   const tableRef = useRef<HTMLTableElement>(null);
 
@@ -169,6 +174,7 @@ const Table = <ColumnType extends Column, DataType extends { id: string }>({
                     (filter) => filter.columnId === column.id
                   )}
                   addFilter={addFilter}
+                  updateFilter={updateFilter}
                   clearFilter={clearFilter}
                   clearAllColumnFilters={clearAllColumnFilters}
                   setActiveIndexOnResize={handleSetActiveIndexOnResize}

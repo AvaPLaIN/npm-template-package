@@ -21,9 +21,17 @@ const ColumnMenuContainer = styled.div`
     border-bottom: 1px solid black;
 
     .add-filter-button {
+      border: none;
+      background-color: transparent;
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
     }
 
     .filter-selector {
+      min-width: 17rem;
       flex: 1;
     }
   }
@@ -60,7 +68,7 @@ const ColumnMenuContainer = styled.div`
         color: red;
         border: none;
         background-color: transparent;
-        font-size: 1.6rem;
+        font-size: 1.4rem;
       }
     }
   }
