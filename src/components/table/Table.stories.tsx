@@ -26,7 +26,7 @@ const handleRenderData = (item: Data, column: Column) => {
 };
 
 const defaultArgs = {
-  columns: columns as Column[],
+  columns: columns,
   columnKeyExtractor: handleColumnKeyExtractor,
   renderColumnItem: handleRenderColumn,
   data: users,

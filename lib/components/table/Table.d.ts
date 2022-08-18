@@ -1,5 +1,5 @@
 import React from "react";
-import { FilterType } from "./hooks/useOnFilter";
+import { SortType } from "./hooks/useOnSort";
 interface ITableProps<ColumnType, DataType> {
     columns: ColumnType[];
     columnKeyExtractor: (item: ColumnType) => string;
@@ -8,7 +8,10 @@ interface ITableProps<ColumnType, DataType> {
     dataKeyExtractor: (item: DataType) => string;
     renderData: (item: DataType, column: ColumnType) => React.ReactNode;
     isServerSide?: boolean;
-    fetchDataOnPagination?: (page: number, limit: number, filter: FilterType) => Promise<any>;
+    selectable?: boolean;
+    resizable?: boolean;
+    contextMenu?: boolean;
+    fetchDataOnPagination?: (page: number, limit: number, sort: SortType) => Promise<any>;
 }
 declare type Width = {
     minWidth?: number;
@@ -22,7 +25,8 @@ export declare type Column = {
     width?: Width;
 };
 declare const Table: <ColumnType extends Column, DataType extends {
+    [key: string]: any;
     id: string;
-}>({ columns, columnKeyExtractor, renderColumnItem, data, dataKeyExtractor, renderData, isServerSide, fetchDataOnPagination, }: ITableProps<ColumnType, DataType>) => JSX.Element;
+}>({ columns, columnKeyExtractor, renderColumnItem, data, dataKeyExtractor, renderData, selectable, contextMenu, resizable, isServerSide, fetchDataOnPagination, }: ITableProps<ColumnType, DataType>) => JSX.Element;
 export default Table;
 //# sourceMappingURL=Table.d.ts.map

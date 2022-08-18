@@ -1,13 +1,13 @@
-import { FilterType } from "./useOnFilter";
+import { SortType } from "./useOnSort";
 interface IUsePaginationProps<DataType> {
     data?: DataType[];
     page?: number;
     limit?: number;
-    filter?: FilterType;
+    sort?: SortType;
     isServerSide?: boolean;
-    fetchDataOnPagination?: (page: number, limit: number, filter: FilterType) => Promise<any>;
+    fetchDataOnPagination?: (page: number, limit: number, filter: SortType) => Promise<any>;
 }
-declare const usePagination: <DataType extends unknown>({ data, page, limit, filter, isServerSide, fetchDataOnPagination, }: IUsePaginationProps<DataType>) => {
+declare const usePagination: <DataType extends unknown>({ data, page, limit, sort, isServerSide, fetchDataOnPagination, }: IUsePaginationProps<DataType>) => {
     pagination: boolean;
     page: number;
     totalPages: number;
