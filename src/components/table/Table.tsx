@@ -135,14 +135,12 @@ const Table = <
         return filterByContains(array, filter.value, filter.columnId);
       }
       if (filter.filter === "notContains" && filter.value.length > 0) {
-        // ! ERROR
         return filterByNotContains(array, filter.value, filter.columnId);
       }
       if (filter.filter === "equals" && filter.value.length > 0) {
         return filterByEquals(array, filter.value, filter.columnId);
       }
       if (filter.filter === "notEqual" && filter.value.length > 0) {
-        // ! ERROR
         return filterByNotEqual(array, filter.value, filter.columnId);
       }
       if (filter.filter === "startsWith" && filter.value.length > 0) {
