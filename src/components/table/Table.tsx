@@ -46,7 +46,7 @@ type Width = {
 export type Column = {
   id: string;
   label: string;
-  filter?: string;
+  filter?: boolean;
   sort?: boolean;
   width?: Width;
 };

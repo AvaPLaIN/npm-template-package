@@ -20,7 +20,7 @@ declare type Width = {
 export declare type Column = {
     id: string;
     label: string;
-    filter?: string;
+    filter?: boolean;
     sort?: boolean;
     width?: Width;
 };
