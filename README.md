@@ -6,10 +6,11 @@
 - Select Rows and Copy (multi)
 - Resizable columns
 - Typescript support
+- Storybook Support
 
-## Preview
+## Storybook
 
-https://react-hook-tables.vercel.app
+https://react-ava-table.vercel.app
 
 ## Install
 
