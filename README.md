@@ -122,16 +122,25 @@ function App() {
 }
 ```
 
+## Table Callback Functions
+
+| name                  | props                                                                   | return             | description                      |
+| --------------------- | ----------------------------------------------------------------------- | ------------------ | -------------------------------- |
+| columnKeyExtractor    | (item: Column)                                                          | string (unique id) | creates a key for each column    |
+| renderColumnItem      | (item: Column)                                                          | string             | return name of the column        |
+| dataKeyExtractor      | (item: Data)                                                            | string (unique id) | creates a key for each dataset   |
+| renderData            | (item: Data, column: Column)                                            | React Component    | determine value for each dataset |
+| fetchDataOnPagination | async (page: number, limit: number, sort: SortType, filter: FilterType) | DataType[]         | calls for new data               |
+
 ## Table Props
 
-| name                  | type                                                                                   | description                                 | default |
-| --------------------- | -------------------------------------------------------------------------------------- | ------------------------------------------- | ------- |
-| limit                 | number                                                                                 | determinse the row count of a page          | 20      |
-| resizable             | boolean                                                                                | able to resize columns width                | true    |
-| contextMenu           | boolean                                                                                | able to open a context menu for each row    | false   |
-| selectable            | boolean                                                                                | able to select single or multiple rows      | false   |
-| isServerSide          | boolean                                                                                | need to set to true if you need server side | false   |
-| fetchDataOnPagination | async (page: number, limit: number, sort: SortType, filter: FilterType) => {return []} | callback function for server side           | -       |
+| name         | type    | description                                 | default |
+| ------------ | ------- | ------------------------------------------- | ------- |
+| limit        | number  | determinse the row count of a page          | 20      |
+| resizable    | boolean | able to resize columns width                | true    |
+| contextMenu  | boolean | able to open a context menu for each row    | false   |
+| selectable   | boolean | able to select single or multiple rows      | false   |
+| isServerSide | boolean | need to set to true if you need server side | false   |
 
 ### Extend Example With Server Side
 
