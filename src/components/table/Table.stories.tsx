@@ -45,7 +45,6 @@ const handleFetchDataOnPagination = async (
   sort: SortType,
   filter: FilterType
 ) => {
-  console.log(filter);
   return new Promise((resolve) =>
     setTimeout(
       () =>

@@ -124,18 +124,14 @@ function App() {
 
 ## Table Props
 
-| name  | type   | description                        |
-| ----- | ------ | ---------------------------------- |
-| limit | number | determinse the row count of a page |
-
-- resizable: boolean
-- contextMenu: boolean
-- selectable: boolean
-
-## Server Side
-
-- isServerSide: true
-- fetchDataOnPagination: callback
+| name                  | type                                                                         | description                                 | default |
+| --------------------- | ---------------------------------------------------------------------------- | ------------------------------------------- | ------- |
+| limit                 | number                                                                       | determinse the row count of a page          | 20      |
+| resizable             | boolean                                                                      | able to resize columns width                | true    |
+| contextMenu           | boolean                                                                      | able to open a context menu for each row    | false   |
+| selectable            | boolean                                                                      | able to select single or multiple rows      | false   |
+| isServerSide          | boolean                                                                      | need to set to true if you need server side | false   |
+| fetchDataOnPagination | async () => {page: number, limit: number, sort: SortType, filter: FilterType | callback function for server side           | -       |
 
 ### Extend Example With Server Side
 
