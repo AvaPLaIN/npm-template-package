@@ -62,7 +62,7 @@ const Table = <
   data,
   dataKeyExtractor,
   renderData,
-  limit = 20,
+  limit = 15,
   selectable = false,
   contextMenu = false,
   resizable = true,
