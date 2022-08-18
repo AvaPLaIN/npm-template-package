@@ -28,6 +28,7 @@ interface ITableProps<ColumnType, DataType> {
   dataKeyExtractor: (item: DataType) => string;
   renderData: (item: DataType, column: ColumnType) => React.ReactNode;
   isServerSide?: boolean;
+  limit?: number;
   selectable?: boolean;
   resizable?: boolean;
   contextMenu?: boolean;
@@ -61,6 +62,7 @@ const Table = <
   data,
   dataKeyExtractor,
   renderData,
+  limit = 20,
   selectable = false,
   contextMenu = false,
   resizable = true,
@@ -96,21 +98,15 @@ const Table = <
 
   const columnRefs = createColumnRefs(columns);
 
-  const {
-    limit,
-    pagination,
-    page,
-    totalPages,
-    isLoading,
-    pageData,
-    onChangePage,
-  } = usePagination({
-    sort,
-    data: sortedData,
-    limit: 10,
-    isServerSide,
-    fetchDataOnPagination,
-  });
+  const { pagination, page, totalPages, isLoading, pageData, onChangePage } =
+    usePagination({
+      sort,
+      filters,
+      data: sortedData,
+      limit,
+      isServerSide,
+      fetchDataOnPagination,
+    });
   const { setResizeIndex } = useOnResizeTable({
     table: tableRef,
     columns: columnRefs,
@@ -237,7 +233,7 @@ const Table = <
           </thead>
           <tbody>
             {isLoading
-              ? Array(limit || 10)
+              ? Array(limit)
                   .fill(0)
                   .map((_, index) => (
                     <tr key={index}>

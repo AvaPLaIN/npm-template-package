@@ -3,6 +3,8 @@ import React from "react";
 import columns from "../../data/columns.json";
 import users from "../../data/users.json";
 import { Data } from "../../data/users.types";
+import { FilterType } from "./hooks/useOnFilter";
+import { SortType } from "./hooks/useOnSort";
 import Table, { Column } from "./Table";
 
 export default {
@@ -40,23 +42,21 @@ ClientSide.args = defaultArgs;
 const handleFetchDataOnPagination = async (
   page: number,
   limit: number,
-  filter: any
+  sort: SortType,
+  filter: FilterType
 ) => {
+  console.log(filter);
   return new Promise((resolve) =>
     setTimeout(
       () =>
         resolve({
           data: [...users]
             .sort((a: any, b: any) => {
-              if (filter?.sort?.sortBy?.value === "asc") {
-                return a[filter?.sort?.sortBy?.id] > b[filter?.sort?.sortBy?.id]
-                  ? 1
-                  : -1;
+              if (sort?.sortBy?.value === "asc") {
+                return a[sort?.sortBy?.id] > b[sort?.sortBy?.id] ? 1 : -1;
               }
-              if (filter?.sort?.sortBy?.value === "desc") {
-                return a[filter?.sort?.sortBy?.id] < b[filter?.sort?.sortBy?.id]
-                  ? 1
-                  : -1;
+              if (sort?.sortBy?.value === "desc") {
+                return a[sort?.sortBy?.id] < b[sort?.sortBy?.id] ? 1 : -1;
               }
               return 0;
             })
@@ -119,4 +119,10 @@ export const WithoutResize = Template.bind({});
 WithoutResize.args = {
   ...defaultArgs,
   resizable: false,
+};
+
+export const WithRowLimit = Template.bind({});
+WithRowLimit.args = {
+  ...defaultArgs,
+  limit: 10,
 };

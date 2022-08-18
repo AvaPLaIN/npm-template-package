@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import { FilterType } from "./useOnFilter";
 import { SortType } from "./useOnSort";
 
 interface IUsePaginationProps<DataType> {
@@ -6,11 +7,13 @@ interface IUsePaginationProps<DataType> {
   page?: number;
   limit?: number;
   sort?: SortType;
+  filters?: FilterType[];
   isServerSide?: boolean;
   fetchDataOnPagination?: (
     page: number,
     limit: number,
-    filter: SortType
+    sort: SortType,
+    filters: FilterType[]
   ) => Promise<any>;
 }
 
@@ -19,6 +22,7 @@ const usePagination = <DataType extends unknown>({
   page,
   limit,
   sort,
+  filters,
   isServerSide = false,
   fetchDataOnPagination,
 }: IUsePaginationProps<DataType>) => {
@@ -30,9 +34,10 @@ const usePagination = <DataType extends unknown>({
       page: number,
       limit: number,
       totalPages: number,
-      sort?: SortType
+      sort: SortType,
+      filters: FilterType[]
     ) => {
-      const res = await fetchDataOnPagination?.(page, limit, sort!);
+      const res = await fetchDataOnPagination?.(page, limit, sort!, filters!);
       if (res.hasNextPage) setTotalPages(totalPages);
       setPageData(res.data);
       setIsLoading(false);
@@ -48,7 +53,8 @@ const usePagination = <DataType extends unknown>({
         currentPage,
         limit || 1,
         currentPage + 1,
-        sort
+        sort!,
+        filters!
       );
     } else {
       setPageData(
@@ -61,6 +67,7 @@ const usePagination = <DataType extends unknown>({
     currentPage,
     data,
     sort,
+    filters,
     handleOnServerSideChangePage,
     isServerSide,
     limit,
@@ -87,7 +94,6 @@ const usePagination = <DataType extends unknown>({
     page: currentPage,
     totalPages,
     pageData,
-    limit,
     isLoading,
     onChangePage: handleOnChangePage,
   };

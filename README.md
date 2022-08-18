@@ -124,6 +124,10 @@ function App() {
 
 ## Table Props
 
+| Attempt | name  | type   | description                        |
+| ------- | ----- | ------ | ---------------------------------- |
+| Seconds | limit | number | determinse the row count of a page |
+
 - resizable: boolean
 - contextMenu: boolean
 - selectable: boolean
