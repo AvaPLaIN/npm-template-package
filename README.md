@@ -131,7 +131,7 @@ function App() {
 | contextMenu           | boolean                                                                       | able to open a context menu for each row    | false   |
 | selectable            | boolean                                                                       | able to select single or multiple rows      | false   |
 | isServerSide          | boolean                                                                       | need to set to true if you need server side | false   |
-| fetchDataOnPagination | async () => {page: number, limit: number, sort: SortType, filter: FilterType} | callback function for server side           | -       |
+| fetchDataOnPagination | async (page: number, limit: number, sort: SortType, filter: FilterType) => {} | callback function for server side           | -       |
 
 ### Extend Example With Server Side
 
