@@ -81,7 +81,9 @@ const usePagination = <DataType extends unknown>({
   );
 
   useEffect(() => {
-    setTotalPages(pagination ? Math.ceil(data!.length / (limit || 1)) : 1);
+    setTotalPages(
+      (pagination ? Math.ceil(data!.length / (limit || 1)) : 1) || 1
+    );
     if (currentPage > totalPages) setCurrentPage(totalPages);
   }, [currentPage, data, limit, pagination, totalPages]);
 
