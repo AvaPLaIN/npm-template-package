@@ -3,7 +3,8 @@ import { CgAddR } from "react-icons/cg";
 import { MdDeleteOutline } from "react-icons/md";
 import { FilterType } from "../table/hooks/useOnFilter";
 import ColumnMenuContainer from "./ColumnMenu.styles";
-import Default from "./components/filters/Default";
+import DefaultFilter from "./components/filters/Default";
+import NumberFilter from "./components/filters/Number";
 
 interface IColumnMenuProps {
   columnId: string;
@@ -18,32 +19,44 @@ interface IColumnMenuProps {
 const filterDisplayNames = {
   contains: {
     label: "Contains",
-    Component: Default,
+    Component: DefaultFilter,
   },
   notContains: {
     label: "Not Contains",
-    Component: Default,
+    Component: DefaultFilter,
   },
   equals: {
     label: "Equals",
-    Component: Default,
+    Component: DefaultFilter,
   },
   notEqual: {
     label: "Not equal",
-    Component: Default,
+    Component: DefaultFilter,
   },
   startsWith: {
     label: "Starts with",
-    Component: Default,
+    Component: DefaultFilter,
   },
   endsWith: {
     label: "Ends with",
-    Component: Default,
+    Component: DefaultFilter,
   },
-  // lessThan: "Less than",
-  // lessThanOrEqual: "Less than or equal",
-  // greaterThan: "Greater than",
-  // greaterThanOrEqual: "Greater than or equal",
+  lessThan: {
+    label: "Less than",
+    Component: NumberFilter,
+  },
+  lessThanOrEqual: {
+    label: "Less than or equal",
+    Component: NumberFilter,
+  },
+  greaterThan: {
+    label: "Greater than",
+    Component: NumberFilter,
+  },
+  greaterThanOrEqual: {
+    label: "Greater than or equal",
+    Component: NumberFilter,
+  },
   // date_before: "Before (Date)",
   // date_after: "After (Date)",
   // date_between: "Between (Date)",
@@ -73,6 +86,14 @@ const ColumnMenu = forwardRef<HTMLDivElement, IColumnMenuProps>(
     return (
       <ColumnMenuContainer ref={menuRef}>
         <div className="filter-header">
+          {filters.length > 0 && (
+            <button
+              className="clear-column-filters-button"
+              onClick={() => clearAllColumnFilters(columnId)}
+            >
+              <MdDeleteOutline />
+            </button>
+          )}
           <button className="add-filter-button" onClick={handleAddFilter}>
             <CgAddR />
           </button>
@@ -88,22 +109,14 @@ const ColumnMenu = forwardRef<HTMLDivElement, IColumnMenuProps>(
             <option value="notEqual">Not equal</option>
             <option value="startsWith">Starts with</option>
             <option value="endsWith">Ends with</option>
-            {/* <option value="lessThan">Less than</option>
+            <option value="lessThan">Less than</option>
             <option value="lessThanOrEqual">Less than or equal</option>
             <option value="greaterThan">greater than</option>
             <option value="greaterThanOrEqual">Greater than or equal</option>
             <option value="date_before">Before (Date)</option>
             <option value="date_after">After (Date)</option>
-            <option value="date_between">Between (Date)</option> */}
+            <option value="date_between">Between (Date)</option>
           </select>
-          {filters.length > 0 && (
-            <button
-              className="clear-column-filters-button"
-              onClick={() => clearAllColumnFilters(columnId)}
-            >
-              <MdDeleteOutline />
-            </button>
-          )}
         </div>
         <div className="active-filters">
           {filters.map((filter) => {

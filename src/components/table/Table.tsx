@@ -4,6 +4,10 @@ import useOnClickOutside from "../../hooks/useOnClickOutside";
 import filterByContains from "../../utils/filters/contains";
 import filterByEndsWith from "../../utils/filters/endsWith";
 import filterByEquals from "../../utils/filters/equals";
+import filterByGreaterThan from "../../utils/filters/greaterThan";
+import filterByGreaterThanOrEqual from "../../utils/filters/greaterThanOrEqual";
+import filterByLessThan from "../../utils/filters/lessThan";
+import filterByLessThanOrEqual from "../../utils/filters/lessThanOrEqual";
 import filterByNotContains from "../../utils/filters/notContains";
 import filterByNotEqual from "../../utils/filters/notEqual";
 import filterByStartsWith from "../../utils/filters/startsWith";
@@ -144,6 +148,34 @@ const Table = <
       }
       if (filter.filter === "endsWith" && filter.value.length > 0) {
         return filterByEndsWith(array, filter.value, filter.columnId);
+      }
+      if (filter.filter === "lessThan" && filter.value.length > 0) {
+        return filterByLessThan(
+          array,
+          parseInt(filter.value, 10),
+          filter.columnId
+        );
+      }
+      if (filter.filter === "lessThanOrEqual" && filter.value.length > 0) {
+        return filterByLessThanOrEqual(
+          array,
+          parseInt(filter.value, 10),
+          filter.columnId
+        );
+      }
+      if (filter.filter === "greaterThan" && filter.value.length > 0) {
+        return filterByGreaterThan(
+          array,
+          parseInt(filter.value, 10),
+          filter.columnId
+        );
+      }
+      if (filter.filter === "greaterThanOrEqual" && filter.value.length > 0) {
+        return filterByGreaterThanOrEqual(
+          array,
+          parseInt(filter.value, 10),
+          filter.columnId
+        );
       }
       return array;
     },

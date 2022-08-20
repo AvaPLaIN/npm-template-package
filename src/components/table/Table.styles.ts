@@ -41,6 +41,7 @@ const TableWrapper = styled.table<TableProps>`
       })
       .join(" ");
   }};
+  grid-auto-rows: minmax(auto, max-content);
 
   thead,
   tbody,
