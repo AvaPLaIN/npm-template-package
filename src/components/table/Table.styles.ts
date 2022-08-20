@@ -22,10 +22,12 @@ export const TableContainer = styled.div`
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: normal;
   color: #333;
+  height: 100%;
 `;
 
 const TableWrapper = styled.table<TableProps>`
   width: 100%;
+  height: 100%;
   overflow: auto;
   border-spacing: 0;
   display: grid;
@@ -53,6 +55,7 @@ const TableWrapper = styled.table<TableProps>`
     display: flex;
     align-items: center;
     user-select: none;
+    align-self: flex-start;
 
     .info {
       cursor: pointer;

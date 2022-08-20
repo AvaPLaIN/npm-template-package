@@ -12,7 +12,11 @@ export default {
   component: Table,
 } as ComponentMeta<typeof Table>;
 
-const Template: ComponentStory<typeof Table> = (args) => <Table {...args} />;
+const Template: ComponentStory<typeof Table> = (args) => (
+  <div style={{ height: "95vh" }}>
+    <Table {...args} />
+  </div>
+);
 
 const handleColumnKeyExtractor = (item: Column) => item.id;
 const handleRenderColumn = (item: Column) => item.label;
