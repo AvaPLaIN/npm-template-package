@@ -97,6 +97,7 @@ const ColumnItem = <ColumnType extends Column>({
         addFilter={addFilter}
         updateFilter={updateFilter}
         clearFilter={clearFilter}
+        clearAllColumnFilters={clearAllColumnFilters}
         ref={columnMenuRef}
         isOpen={isColumnMenuOpen}
       />

@@ -3,7 +3,7 @@ import styled from "styled-components";
 const ColumnMenuContainer = styled.div`
   z-index: 2;
   position: absolute;
-  top: 10px;
+  top: 40px;
   right: 10px;
   background-color: #ebe9e6;
   border: 1px solid #ccc;
@@ -21,6 +21,16 @@ const ColumnMenuContainer = styled.div`
     border-bottom: 1px solid black;
 
     .add-filter-button {
+      border: none;
+      background-color: transparent;
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .clear-column-filters-button {
       border: none;
       background-color: transparent;
       font-size: 1.4rem;

@@ -12,6 +12,7 @@ interface IColumnMenuProps {
   addFilter: (columnId: string, filter: string) => void;
   updateFilter: (id: string, filter: string) => void;
   clearFilter: (id: string) => void;
+  clearAllColumnFilters: (columnId: string) => void;
 }
 
 const filterDisplayNames = {
@@ -50,8 +51,15 @@ const filterDisplayNames = {
 
 const ColumnMenu = forwardRef<HTMLDivElement, IColumnMenuProps>(
   (props, menuRef) => {
-    const { columnId, filters, isOpen, addFilter, updateFilter, clearFilter } =
-      props;
+    const {
+      columnId,
+      filters,
+      isOpen,
+      addFilter,
+      updateFilter,
+      clearFilter,
+      clearAllColumnFilters,
+    } = props;
 
     const selectRef = useRef<HTMLSelectElement>(null);
 
@@ -88,6 +96,14 @@ const ColumnMenu = forwardRef<HTMLDivElement, IColumnMenuProps>(
             <option value="date_after">After (Date)</option>
             <option value="date_between">Between (Date)</option> */}
           </select>
+          {filters.length > 0 && (
+            <button
+              className="clear-column-filters-button"
+              onClick={() => clearAllColumnFilters(columnId)}
+            >
+              <MdDeleteOutline />
+            </button>
+          )}
         </div>
         <div className="active-filters">
           {filters.map((filter) => {
