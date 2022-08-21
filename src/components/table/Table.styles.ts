@@ -56,6 +56,14 @@ const TableWrapper = styled.table<TableProps>`
     padding: 16px 20px;
   }
 
+  tr {
+    &:nth-child(odd) {
+      td {
+        background-color: #f2f2f2;
+      }
+    }
+  }
+
   td {
     border-top: 1px solid #ccc;
   }
