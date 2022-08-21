@@ -1,17 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FilterType } from "../../../table/hooks/useOnFilter";
 
-interface IContainsProps {
+interface IDefaultFilterProps {
   filter: FilterType;
   updateFilter: (id: string, filter: string) => void;
 }
 
-const Contains = ({ filter, updateFilter }: IContainsProps) => {
+const DefaultFilter = ({ filter, updateFilter }: IDefaultFilterProps) => {
+  const [filterValue, setFilterValue] = useState(filter.value);
+
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    updateFilter(filter.id, e.target.value);
+    setFilterValue(e.target.value);
   };
 
-  return <input type="text" value={filter.value} onChange={handleOnChange} />;
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      updateFilter(filter.id, filterValue);
+    }, 500);
+
+    return () => clearTimeout(timeout);
+  }, [filter, filterValue, updateFilter]);
+
+  return <input type="text" value={filterValue} onChange={handleOnChange} />;
 };
 
-export default Contains;
+export default DefaultFilter;

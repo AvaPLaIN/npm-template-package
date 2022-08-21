@@ -113,9 +113,9 @@ const ColumnMenu = forwardRef<HTMLDivElement, IColumnMenuProps>(
             <option value="lessThanOrEqual">Less than or equal</option>
             <option value="greaterThan">greater than</option>
             <option value="greaterThanOrEqual">Greater than or equal</option>
-            <option value="date_before">Before (Date)</option>
+            {/* <option value="date_before">Before (Date)</option>
             <option value="date_after">After (Date)</option>
-            <option value="date_between">Between (Date)</option>
+            <option value="date_between">Between (Date)</option> */}
           </select>
         </div>
         <div className="active-filters">
