@@ -85,8 +85,7 @@ export const Row = styled.tr<IRowProps>`
   color: ${({ selected }) => (selected ? "white" : "black")};
 
   td {
-    background-color: ${({ selected }) =>
-      selected ? "blue" : "transparent"} !important;
+    ${({ selected }) => selected && `background-color: #42a8fc !important;`}
   }
 `;
 
