@@ -76,17 +76,4 @@ const TableWrapper = styled.table<TableProps>`
   }
 `;
 
-interface IRowProps {
-  selected: boolean;
-  [key: string]: any;
-}
-
-export const Row = styled.tr<IRowProps>`
-  color: ${({ selected }) => (selected ? "white" : "black")};
-
-  td {
-    ${({ selected }) => selected && `background-color: #42a8fc !important;`}
-  }
-`;
-
 export default TableWrapper;

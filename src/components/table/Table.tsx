@@ -16,12 +16,13 @@ import sortDesc from "../../utils/sorts/desc";
 import ColumnItem from "../column-item/ColumnItem";
 import ContextMenu from "../context-menu/ContextMenu";
 import Pagination from "../pagination/Pagination";
+import Row from "../row/Row";
 import useOnFilter, { FilterType } from "./hooks/useOnFilter";
 import useOnResizeTable from "./hooks/useOnResizeTable";
 import useOnSelect from "./hooks/useOnSelect";
 import useOnSort, { SortType } from "./hooks/useOnSort";
 import usePagination from "./hooks/usePagination";
-import TableWrapper, { Row, TableContainer } from "./Table.styles";
+import TableWrapper, { TableContainer } from "./Table.styles";
 import createColumnRefs from "./utils/createColumnRefs";
 
 interface ITableProps<ColumnType, DataType> {
@@ -278,25 +279,18 @@ const Table = <
                   ))
               : pageData!.map((item) => (
                   <Row
-                    key={dataKeyExtractor(item)}
-                    onClick={
-                      selectable
-                        ? (event: React.MouseEvent<HTMLTableRowElement>) =>
-                            onSelect(event, item)
-                        : null
-                    }
-                    onContextMenu={
-                      contextMenu
-                        ? (event: React.MouseEvent<HTMLTableRowElement>) =>
-                            handleOnContextMenu(event, item)
-                        : null
-                    }
+                    item={item}
+                    columns={columns}
+                    dataKeyExtractor={dataKeyExtractor}
+                    selectable={selectable}
+                    contextMenu={contextMenu}
+                    onContextMenu={handleOnContextMenu}
+                    onSelect={onSelect}
+                    renderData={renderData}
                     selected={selectedRows.some(
                       (selectedRow) => selectedRow.id === item.id
                     )}
-                  >
-                    {columns.map((column) => renderData(item, column))}
-                  </Row>
+                  />
                 ))}
           </tbody>
         </TableWrapper>
