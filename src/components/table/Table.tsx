@@ -34,6 +34,7 @@ interface ITableProps<ColumnType, DataType> {
   renderData: (item: DataType, column: ColumnType) => React.ReactNode;
   isServerSide?: boolean;
   limit?: number;
+  rowGrouping?: boolean;
   selectable?: boolean;
   resizable?: boolean;
   contextMenu?: boolean;
@@ -68,6 +69,7 @@ const Table = <
   dataKeyExtractor,
   renderData,
   limit = 15,
+  rowGrouping = false,
   selectable = false,
   contextMenu = false,
   resizable = true,
@@ -279,9 +281,9 @@ const Table = <
                   ))
               : pageData!.map((item) => (
                   <Row
+                    key={dataKeyExtractor(item)}
                     item={item}
                     columns={columns}
-                    dataKeyExtractor={dataKeyExtractor}
                     selectable={selectable}
                     contextMenu={contextMenu}
                     onContextMenu={handleOnContextMenu}

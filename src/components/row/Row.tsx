@@ -4,7 +4,6 @@ import RowContainer from "./Row.styles";
 interface IRowProps<DataType, ColumnType> {
   item: DataType;
   columns: ColumnType[];
-  dataKeyExtractor: (item: DataType) => string;
   selectable: boolean;
   selected: boolean;
   contextMenu: boolean;
@@ -22,7 +21,6 @@ interface IRowProps<DataType, ColumnType> {
 const Row = <DataType extends { id: string; [key: string]: any }, ColumnType>({
   item,
   columns,
-  dataKeyExtractor,
   selectable,
   selected,
   contextMenu,
@@ -33,7 +31,6 @@ const Row = <DataType extends { id: string; [key: string]: any }, ColumnType>({
   return (
     <RowContainer
       columns={columns}
-      key={dataKeyExtractor(item)}
       onClick={
         selectable
           ? (event: React.MouseEvent<HTMLTableRowElement>) =>
