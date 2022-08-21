@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { FilterType } from "../../../table/hooks/useOnFilter";
+import { FilterType } from "../../../../table/hooks/useOnFilter";
+import NumberFilterContainer from "./Number.styles";
 
 interface INumberFilterProps {
   filter: FilterType;
@@ -21,7 +22,13 @@ const NumberFilter = ({ filter, updateFilter }: INumberFilterProps) => {
     return () => clearTimeout(timeout);
   }, [filter, filterValue, updateFilter]);
 
-  return <input type="number" value={filterValue} onChange={handleOnChange} />;
+  return (
+    <NumberFilterContainer
+      type="number"
+      value={filterValue}
+      onChange={handleOnChange}
+    />
+  );
 };
 
 export default NumberFilter;

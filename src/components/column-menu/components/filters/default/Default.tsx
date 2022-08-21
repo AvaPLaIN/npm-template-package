@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { FilterType } from "../../../table/hooks/useOnFilter";
+import { FilterType } from "../../../../table/hooks/useOnFilter";
+import DefaultFilterContainer from "./Default.styles";
 
 interface IDefaultFilterProps {
   filter: FilterType;
@@ -21,7 +22,13 @@ const DefaultFilter = ({ filter, updateFilter }: IDefaultFilterProps) => {
     return () => clearTimeout(timeout);
   }, [filter, filterValue, updateFilter]);
 
-  return <input type="text" value={filterValue} onChange={handleOnChange} />;
+  return (
+    <DefaultFilterContainer
+      type="text"
+      value={filterValue}
+      onChange={handleOnChange}
+    />
+  );
 };
 
 export default DefaultFilter;

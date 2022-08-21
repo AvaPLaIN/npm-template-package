@@ -3,8 +3,8 @@ import { CgAddR } from "react-icons/cg";
 import { MdDeleteOutline } from "react-icons/md";
 import { FilterType } from "../table/hooks/useOnFilter";
 import ColumnMenuContainer from "./ColumnMenu.styles";
-import DefaultFilter from "./components/filters/Default";
-import NumberFilter from "./components/filters/Number";
+import DefaultFilter from "./components/filters/default/Default";
+import NumberFilter from "./components/filters/number/Number";
 
 interface IColumnMenuProps {
   columnId: string;
