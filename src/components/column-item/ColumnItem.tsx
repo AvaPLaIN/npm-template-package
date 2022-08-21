@@ -7,7 +7,7 @@ import { FilterType } from "../table/hooks/useOnFilter";
 import { SortType } from "../table/hooks/useOnSort";
 import { Column } from "../table/Table";
 import { ColumnRefType } from "../table/utils/createColumnRefs";
-import ResizeBar from "./ColumnItem.styles";
+import ThContainer, { ResizeBar } from "./ColumnItem.styles";
 
 interface IColumnProps<ColumnType> {
   column: ColumnType;
@@ -69,7 +69,7 @@ const ColumnItem = <ColumnType extends Column>({
   };
 
   return (
-    <th ref={column.ref}>
+    <ThContainer ref={column.ref}>
       <div
         className="info"
         onClick={column.sort ? () => handleOnSort(column.id) : undefined}
@@ -101,7 +101,7 @@ const ColumnItem = <ColumnType extends Column>({
         ref={columnMenuRef}
         isOpen={isColumnMenuOpen}
       />
-    </th>
+    </ThContainer>
   );
 };
 

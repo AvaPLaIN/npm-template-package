@@ -7,6 +7,7 @@ interface IColumnMenuProps {
     addFilter: (columnId: string, filter: string) => void;
     updateFilter: (id: string, filter: string) => void;
     clearFilter: (id: string) => void;
+    clearAllColumnFilters: (columnId: string) => void;
 }
 declare const ColumnMenu: React.ForwardRefExoticComponent<IColumnMenuProps & React.RefAttributes<HTMLDivElement>>;
 export default ColumnMenu;
