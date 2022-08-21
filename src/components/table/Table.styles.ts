@@ -51,7 +51,9 @@ const TableWrapper = styled.table<TableProps>`
   }
 
   th {
-    position: relative;
+    background-color: white;
+    position: sticky;
+    top: 0;
     font-size: 18px;
     display: flex;
     align-items: center;
