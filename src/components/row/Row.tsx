@@ -32,6 +32,7 @@ const Row = <DataType extends { id: string; [key: string]: any }, ColumnType>({
 }: IRowProps<DataType, ColumnType>) => {
   return (
     <RowContainer
+      columns={columns}
       key={dataKeyExtractor(item)}
       onClick={
         selectable
@@ -47,7 +48,9 @@ const Row = <DataType extends { id: string; [key: string]: any }, ColumnType>({
       }
       selected={selected}
     >
-      {columns.map((column) => renderData(item, column))}
+      <div className="trs">
+        {columns.map((column) => renderData(item, column))}
+      </div>
     </RowContainer>
   );
 };
