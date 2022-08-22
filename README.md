@@ -93,29 +93,10 @@ const users = [
 const data: Data[] = users;
 
 function App() {
-  const handleColumnKeyExtractor = (item: Column) => item.id;
-  const handleRenderColumn = (item: Column) => item.label;
-
-  const handleDataKeyExtractor = (item: Data) => {
-    return `${item.name}-${item.age}-${item.state}`;
-  };
-
-  const handleRenderData = (item: Data, column: Column) => {
-    return (
-      <td key={`${item.name}-${column.id}`}>
-        <span>{item[column.id as keyof Data]}</span>
-      </td>
-    );
-  };
-
   return (
     <Table
       columns={columns}
-      columnKeyExtractor={handleColumnKeyExtractor}
-      renderColumnItem={handleRenderColumn}
       data={data}
-      dataKeyExtractor={handleDataKeyExtractor}
-      renderData={handleRenderData}
       selectable={true}
       contextMenu={true}
     />
@@ -125,13 +106,13 @@ function App() {
 
 ## Table Callback Functions
 
-| name                  | props                                                                   | return             | description                      |
-| --------------------- | ----------------------------------------------------------------------- | ------------------ | -------------------------------- |
-| columnKeyExtractor    | (item: Column)                                                          | string (unique id) | creates a key for each column    |
-| renderColumnItem      | (item: Column)                                                          | string             | return name of the column        |
-| dataKeyExtractor      | (item: Data)                                                            | string (unique id) | creates a key for each dataset   |
-| renderData            | (item: Data, column: Column)                                            | React Component    | determine value for each dataset |
-| fetchDataOnPagination | async (page: number, limit: number, sort: SortType, filter: FilterType) | DataType[]         | calls for new data               |
+| name                  | props                                                                   | return             | description                      | default                                                                                             |
+| --------------------- | ----------------------------------------------------------------------- | ------------------ | -------------------------------- | --------------------------------------------------------------------------------------------------- |
+| columnKeyExtractor    | (item: Column)                                                          | string (unique id) | creates a key for each column    | column.id                                                                                           |
+| renderColumnItem      | (item: Column)                                                          | string             | return name of the column        | column.label                                                                                        |
+| dataKeyExtractor      | (item: Data)                                                            | string (unique id) | creates a key for each dataset   | item.id                                                                                             |
+| renderData            | (item: Data, column: Column)                                            | React Component    | determine value for each dataset | return (<td key={`${item.id}-${column.id}`}><span>{item[column.id as keyof DataType]}</span></td>); |
+| fetchDataOnPagination | async (page: number, limit: number, sort: SortType, filter: FilterType) | DataType[]         | calls for new data               | -                                                                                                   |
 
 ## Table Props
 
@@ -188,4 +169,41 @@ const handleFetchDataOnPagination = async (
   contextMenu={true}
   isServerSide={true}
 />
+```
+
+### Custom Callback Functions Example
+
+```
+const App = () => {
+
+  // TODO - add columns, data from first example
+
+  const handleColumnKeyExtractor = (item: Column) => item.id;
+  const handleRenderColumn = (item: Column) => item.label;
+
+  const handleDataKeyExtractor = (item: Data) => {
+    return `${item.name}-${item.age}-${item.state}`;
+  };
+
+  const handleRenderData = (item: Data, column: Column) => {
+    return (
+      <td key={`${item.name}-${column.id}`}>
+        <span>{item[column.id as keyof Data]}</span>
+      </td>
+    );
+  };
+
+  return (
+    <Table
+      columns={columns}
+      columnKeyExtractor={handleColumnKeyExtractor}
+      renderColumnItem={handleRenderColumn}
+      data={data}
+      dataKeyExtractor={handleDataKeyExtractor}
+      renderData={handleRenderData}
+      selectable={true}
+      contextMenu={true}
+    />
+  );
+}
 ```

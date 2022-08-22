@@ -33,11 +33,7 @@ const handleRenderData = (item: Data, column: Column) => {
 
 const defaultArgs = {
   columns: columns as Column[],
-  columnKeyExtractor: handleColumnKeyExtractor,
-  renderColumnItem: handleRenderColumn,
   data: users,
-  dataKeyExtractor: handleDataKeyExtractor,
-  renderData: handleRenderData,
 };
 
 export const ClientSide = Template.bind({});

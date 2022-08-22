@@ -17,6 +17,12 @@ import ColumnItem from "../column-item/ColumnItem";
 import ContextMenu from "../context-menu/ContextMenu";
 import Pagination from "../pagination/Pagination";
 import Row from "../row/Row";
+import {
+  defaultColumnKeyExtractor,
+  defaultDataKeyExtractor,
+  defaultRenderColumn,
+  defaultRenderData,
+} from "./default-callbacks";
 import useOnFilter, { FilterType } from "./hooks/useOnFilter";
 import useOnResizeTable from "./hooks/useOnResizeTable";
 import useOnSelect from "./hooks/useOnSelect";
@@ -63,11 +69,11 @@ const Table = <
   DataType extends { id: string; [key: string]: any }
 >({
   columns,
-  columnKeyExtractor,
-  renderColumnItem,
+  columnKeyExtractor = defaultColumnKeyExtractor,
+  renderColumnItem = defaultRenderColumn,
   data,
-  dataKeyExtractor,
-  renderData,
+  dataKeyExtractor = defaultDataKeyExtractor,
+  renderData = defaultRenderData,
   limit = 15,
   rowGrouping = false,
   selectable = false,
