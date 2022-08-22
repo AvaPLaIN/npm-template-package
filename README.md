@@ -132,6 +132,9 @@ const handleFetchDataOnPagination = async (
   limit: number,
   filter: any
 ) => {
+
+  // TODO - add columns, data from first example
+
   return new Promise((resolve) =>
     setTimeout(
       () =>
@@ -160,14 +163,11 @@ const handleFetchDataOnPagination = async (
 
 <Table
   columns={columns}
-  columnKeyExtractor={handleColumnKeyExtractor}
-  renderColumnItem={handleRenderColumn}
   data={data}
-  dataKeyExtractor={handleDataKeyExtractor}
-  renderData={handleRenderData}
   selectable={true}
   contextMenu={true}
   isServerSide={true}
+  fetchDataOnPagination={handleFetchDataOnPagination}
 />
 ```
 
@@ -178,13 +178,11 @@ const App = () => {
 
   // TODO - add columns, data from first example
 
-  const handleColumnKeyExtractor = (item: Column) => item.id;
-  const handleRenderColumn = (item: Column) => item.label;
+  // DEFAULT CALLBACKS
+  const handleColumnKeyExtractor = (column: Column) => column.id;
+  const handleRenderColumn = (column: Column) => column.label;
 
-  const handleDataKeyExtractor = (item: Data) => {
-    return `${item.name}-${item.age}-${item.state}`;
-  };
-
+  const handleDataKeyExtractor = (item: Data) => item.id;
   const handleRenderData = (item: Data, column: Column) => {
     return (
       <td key={`${item.name}-${column.id}`}>
