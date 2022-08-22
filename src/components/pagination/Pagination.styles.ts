@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const PaginationContainer = styled.div`
-  align-self: flex-end;
+  /* align-self: flex-end; */
   display: flex;
   align-items: center;
   border: 1px solid #e6e6e6;

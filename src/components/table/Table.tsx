@@ -98,13 +98,14 @@ const Table = <
     });
   });
 
-  const { sort, addSort } = useOnSort();
+  const { sort, addSort, clearSort } = useOnSort();
   const {
     filters,
     addFilter,
     updateFilter,
     clearFilter,
     clearAllColumnFilters,
+    clearAllFilters,
   } = useOnFilter();
 
   const tableRef = useRef<HTMLTableElement>(null);
@@ -302,13 +303,23 @@ const Table = <
                 ))}
           </tbody>
         </TableWrapper>
-        {pagination && (
-          <Pagination
-            page={page}
-            totalPages={totalPages}
-            onChangePage={onChangePage}
-          />
-        )}
+        <div className="footer-controls">
+          <div className="clear-buttons">
+            <button onClick={clearSort} disabled={!sort.isSort}>
+              Clear Sort
+            </button>
+            <button onClick={clearAllFilters} disabled={filters.length === 0}>
+              Clear Filter
+            </button>
+          </div>
+          {pagination && (
+            <Pagination
+              page={page}
+              totalPages={totalPages}
+              onChangePage={onChangePage}
+            />
+          )}
+        </div>
       </TableContainer>
       <ContextMenu
         {...contextMenuProps}

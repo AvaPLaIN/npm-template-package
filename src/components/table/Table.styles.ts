@@ -8,6 +8,7 @@ interface TableProps {
 export const TableContainer = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 10px;
   width: 100%;
   overflow: auto;
   border-collapse: collapse;
@@ -23,6 +24,23 @@ export const TableContainer = styled.div`
   font-weight: normal;
   color: #333;
   height: 100%;
+
+  .footer-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .clear-buttons {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+
+      button {
+        cursor: pointer;
+        padding: 5px 10px;
+      }
+    }
+  }
 `;
 
 const TableWrapper = styled.table<TableProps>`

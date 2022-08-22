@@ -26,9 +26,14 @@ const useOnSort = () => {
     });
   };
 
+  const handleClearSort = () => {
+    setSort({ isSort: false });
+  };
+
   return {
     sort,
     addSort: handleAddSort,
+    clearSort: handleClearSort,
   };
 };
 
