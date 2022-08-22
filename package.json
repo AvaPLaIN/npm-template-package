@@ -3,6 +3,7 @@
   "version": "0.1.1",
   "private": false,
   "main": "lib/index.js",
+  "license": "MIT",
   "directories": {
     "lib": "lib"
   },
