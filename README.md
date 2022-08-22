@@ -106,13 +106,13 @@ function App() {
 
 ## Table Callback Functions
 
-| name                  | props                                                                   | return             | description                      | default                                                                                             |
-| --------------------- | ----------------------------------------------------------------------- | ------------------ | -------------------------------- | --------------------------------------------------------------------------------------------------- |
-| columnKeyExtractor    | (item: Column)                                                          | string (unique id) | creates a key for each column    | column.id                                                                                           |
-| renderColumnItem      | (item: Column)                                                          | string             | return name of the column        | column.label                                                                                        |
-| dataKeyExtractor      | (item: Data)                                                            | string (unique id) | creates a key for each dataset   | item.id                                                                                             |
-| renderData            | (item: Data, column: Column)                                            | React Component    | determine value for each dataset | return (<td key={`${item.id}-${column.id}`}><span>{item[column.id as keyof DataType]}</span></td>); |
-| fetchDataOnPagination | async (page: number, limit: number, sort: SortType, filter: FilterType) | DataType[]         | calls for new data               | -                                                                                                   |
+| name                  | props                                                                   | return             | description                      |
+| --------------------- | ----------------------------------------------------------------------- | ------------------ | -------------------------------- |
+| columnKeyExtractor    | (item: Column)                                                          | string (unique id) | creates a key for each column    |
+| renderColumnItem      | (item: Column)                                                          | string             | return name of the column        |
+| dataKeyExtractor      | (item: Data)                                                            | string (unique id) | creates a key for each dataset   |
+| renderData            | (item: Data, column: Column)                                            | React Component    | determine value for each dataset |
+| fetchDataOnPagination | async (page: number, limit: number, sort: SortType, filter: FilterType) | DataType[]         | calls for new data               |
 
 ## Table Props
 
