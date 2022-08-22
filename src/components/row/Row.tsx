@@ -45,9 +45,7 @@ const Row = <DataType extends { id: string; [key: string]: any }, ColumnType>({
       }
       selected={selected}
     >
-      <div className="trs">
-        {columns.map((column) => renderData(item, column))}
-      </div>
+      {columns.map((column) => renderData(item, column))}
     </RowContainer>
   );
 };
