@@ -2,7 +2,6 @@ import React from "react";
 interface IRowProps<DataType, ColumnType> {
     item: DataType;
     columns: ColumnType[];
-    dataKeyExtractor: (item: DataType) => string;
     selectable: boolean;
     selected: boolean;
     contextMenu: boolean;
@@ -13,6 +12,6 @@ interface IRowProps<DataType, ColumnType> {
 declare const Row: <DataType extends {
     [key: string]: any;
     id: string;
-}, ColumnType>({ item, columns, dataKeyExtractor, selectable, selected, contextMenu, onSelect, onContextMenu, renderData, }: IRowProps<DataType, ColumnType>) => JSX.Element;
+}, ColumnType>({ item, columns, selectable, selected, contextMenu, onSelect, onContextMenu, renderData, }: IRowProps<DataType, ColumnType>) => JSX.Element;
 export default Row;
 //# sourceMappingURL=Row.d.ts.map

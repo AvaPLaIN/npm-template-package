@@ -9,6 +9,7 @@ interface ITableProps<ColumnType, DataType> {
     renderData: (item: DataType, column: ColumnType) => React.ReactNode;
     isServerSide?: boolean;
     limit?: number;
+    rowGrouping?: boolean;
     selectable?: boolean;
     resizable?: boolean;
     contextMenu?: boolean;
@@ -28,6 +29,6 @@ export declare type Column = {
 declare const Table: <ColumnType extends Column, DataType extends {
     [key: string]: any;
     id: string;
-}>({ columns, columnKeyExtractor, renderColumnItem, data, dataKeyExtractor, renderData, limit, selectable, contextMenu, resizable, isServerSide, fetchDataOnPagination, }: ITableProps<ColumnType, DataType>) => JSX.Element;
+}>({ columns, columnKeyExtractor, renderColumnItem, data, dataKeyExtractor, renderData, limit, rowGrouping, selectable, contextMenu, resizable, isServerSide, fetchDataOnPagination, }: ITableProps<ColumnType, DataType>) => JSX.Element;
 export default Table;
 //# sourceMappingURL=Table.d.ts.map
