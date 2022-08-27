@@ -101,6 +101,13 @@ WithContextMenu.args = {
   contextMenu: true,
 };
 
+export const BarCharts = Template.bind({});
+BarCharts.args = {
+  ...defaultArgs,
+  selectable: true,
+  contextMenu: true,
+};
+
 export const WithoutResize = Template.bind({});
 WithoutResize.args = {
   ...defaultArgs,
