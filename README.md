@@ -4,6 +4,7 @@
 - Server and Client Side rendering
 - Filter and Sort Data
 - Select Rows and Copy (multi)
+- Create Dynamic Charts from Table Data
 - Resizable columns
 - Typescript support
 - Storybook Support
@@ -116,13 +117,13 @@ function App() {
 
 ## Table Props
 
-| name         | type    | description                                 | default |
-| ------------ | ------- | ------------------------------------------- | ------- |
-| limit        | number  | determinse the row count of a page          | 15      |
-| resizable    | boolean | able to resize columns width                | true    |
-| contextMenu  | boolean | able to open a context menu for each row    | false   |
-| selectable   | boolean | able to select single or multiple rows      | false   |
-| isServerSide | boolean | need to set to true if you need server side | false   |
+| name         | type    | description                                                       | default |
+| ------------ | ------- | ----------------------------------------------------------------- | ------- |
+| limit        | number  | determinse the row count of a page                                | 15      |
+| resizable    | boolean | able to resize columns width                                      | true    |
+| contextMenu  | boolean | able to open a context menu for each row (enable copy and charts) | false   |
+| selectable   | boolean | able to select single or multiple rows                            | false   |
+| isServerSide | boolean | need to set to true if you need server side                       | false   |
 
 ### Extend Example With Server Side
 
