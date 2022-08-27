@@ -33,7 +33,6 @@ const Chart = <DataType extends { id: string; [key: string]: any }>({
 
   const downloadAsImage = async () => {
     const element = chartRef.current;
-    console.log("download", chartRef);
     if (element) {
       const canvas = await html2canvas(element);
 
