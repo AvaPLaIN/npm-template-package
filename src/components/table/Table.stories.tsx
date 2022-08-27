@@ -18,19 +18,6 @@ const Template: ComponentStory<typeof Table> = (args) => (
   </div>
 );
 
-const handleColumnKeyExtractor = (item: Column) => item.id;
-const handleRenderColumn = (item: Column) => item.label;
-const handleDataKeyExtractor = (item: Data) => {
-  return `${item.name}-${item.age}-${item.state}`;
-};
-const handleRenderData = (item: Data, column: Column) => {
-  return (
-    <td key={`${item.name}-${column.id}`}>
-      <span>{item[column.id as keyof Data]}</span>
-    </td>
-  );
-};
-
 const defaultArgs = {
   columns: columns as Column[],
   data: users,

@@ -3,6 +3,7 @@ import styled from "styled-components";
 const ColumnMenuContainer = styled.div`
   z-index: 2;
   position: absolute;
+  border-radius: 0.3rem;
   top: 40px;
   right: 10px;
   background-color: #ebe9e6;

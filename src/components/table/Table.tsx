@@ -13,6 +13,7 @@ import filterByNotEqual from "../../utils/filters/notEqual";
 import filterByStartsWith from "../../utils/filters/startsWith";
 import sortAsc from "../../utils/sorts/asc";
 import sortDesc from "../../utils/sorts/desc";
+import Chart from "../chart/Chart";
 import ColumnItem from "../column-item/ColumnItem";
 import ContextMenu from "../context-menu/ContextMenu";
 import Pagination from "../pagination/Pagination";
@@ -23,6 +24,7 @@ import {
   defaultRenderColumn,
   defaultRenderData,
 } from "./default-callbacks";
+import useOnChart from "./hooks/useOnChart";
 import useOnFilter, { FilterType } from "./hooks/useOnFilter";
 import useOnResizeTable from "./hooks/useOnResizeTable";
 import useOnSelect from "./hooks/useOnSelect";
@@ -83,6 +85,7 @@ const Table = <
   fetchDataOnPagination,
 }: ITableProps<ColumnType, DataType>) => {
   const [sortedData, setSortedData] = useState(data || []);
+  const { isChartOpen, onOpenChart, onCloseChart } = useOnChart();
 
   const [contextMenuProps, setContextMenuProps] = useState({
     isOpen: false,
@@ -249,6 +252,9 @@ const Table = <
     <>
       <GlobalStyles />
       <TableContainer>
+        {isChartOpen && (
+          <Chart onCloseChart={onCloseChart} items={selectedRows} />
+        )}
         <TableWrapper ref={tableRef} columns={columnRefs}>
           <thead>
             <tr>
@@ -327,6 +333,7 @@ const Table = <
         onCopy={handleOnCopy}
         ref={contextMenuRef}
         tableRef={tableRef}
+        onOpenChart={onOpenChart}
       />
     </>
   );

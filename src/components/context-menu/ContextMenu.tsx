@@ -7,13 +7,14 @@ interface IContextMenuProps<ItemType> {
   item: ItemType | null;
   tableRef: React.RefObject<HTMLTableElement>;
   onCopy: (item: ItemType) => void;
+  onOpenChart: () => void;
 }
 
 const ContextMenu = <ItemType extends { id: string }>(
   props: IContextMenuProps<ItemType>,
   ref: React.ForwardedRef<HTMLDivElement>
 ) => {
-  const { isOpen, mousePosition, item, onCopy, tableRef } = props;
+  const { isOpen, mousePosition, item, onCopy, tableRef, onOpenChart } = props;
   if (!isOpen) return null;
 
   return (
@@ -24,7 +25,7 @@ const ContextMenu = <ItemType extends { id: string }>(
     >
       <ul>
         <li onClick={() => onCopy(item!)}>Copy</li>
-        <li>More coming soon ...</li>
+        <li onClick={onOpenChart}>Chart</li>
       </ul>
     </ContextMenuContainer>
   );
