@@ -7,7 +7,7 @@ interface IChartContainerProps {
 const ChartContainer = styled.div<IChartContainerProps>`
   z-index: 99;
   position: absolute;
-  height: ${({ isFullSize }) => (isFullSize ? "100%" : "80%")};
+  min-height: ${({ isFullSize }) => (isFullSize ? "100%" : "80%")};
   width: ${({ isFullSize }) => (isFullSize ? "100%" : "80%")};
   top: 50%;
   left: 50%;
@@ -15,6 +15,7 @@ const ChartContainer = styled.div<IChartContainerProps>`
   background-color: white;
   display: flex;
   flex-direction: column;
+  padding: 1rem;
 
   .chart-header {
     padding: 0 1rem;
@@ -54,10 +55,11 @@ const ChartContainer = styled.div<IChartContainerProps>`
   }
 
   .chart {
+    align-self: center;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex: 1;
+    width: 100%;
   }
 `;
 
