@@ -2,6 +2,24 @@
   "name": "react-ava-table",
   "version": "0.1.2",
   "private": false,
+  "author": "AvaPLaIN",
+  "keywords": [
+    "react",
+    "table",
+    "datasets",
+    "filter",
+    "sort",
+    "charts",
+    "server-side",
+    "client-side",
+    "typescript",
+    "select and copy rows",
+    "resizable"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AvaPLaIN/react-ava-table"
+  },
   "main": "lib/index.js",
   "license": "MIT",
   "directories": {
