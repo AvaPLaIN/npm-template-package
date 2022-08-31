@@ -8,6 +8,7 @@ export declare type SortType = {
 declare const useOnSort: () => {
     sort: SortType;
     addSort: (id: string, value: string) => void;
+    clearSort: () => void;
 };
 export default useOnSort;
 //# sourceMappingURL=useOnSort.d.ts.map
