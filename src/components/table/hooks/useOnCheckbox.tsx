@@ -11,10 +11,15 @@ const useOnCheckbox = () => {
     setCheckedRows((prev) => prev.filter((row) => row !== rowId));
   };
 
+  const handleOnClearCheckedRows = () => {
+    setCheckedRows([]);
+  };
+
   return {
     checkedRows,
     onAddCheckedRow: handleOnAddCheckedRow,
     onRemoveCheckedRow: handleOnRemoveCheckedRow,
+    onClearCheckedRows: handleOnClearCheckedRows,
   };
 };
 

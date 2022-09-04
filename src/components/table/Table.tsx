@@ -134,7 +134,12 @@ const Table = <
 
   const { selectedRows, onSelect } = useOnSelect<DataType>();
 
-  const { checkedRows, onAddCheckedRow, onRemoveCheckedRow } = useOnCheckbox();
+  const {
+    checkedRows,
+    onAddCheckedRow,
+    onRemoveCheckedRow,
+    onClearCheckedRows,
+  } = useOnCheckbox();
 
   const handleOnSort = useCallback(
     (column: string, type: string) => {
@@ -257,6 +262,7 @@ const Table = <
     setSortedData((sortedData) =>
       sortedData.filter((data) => !checkedRows.includes(data.id))
     );
+    onClearCheckedRows();
   };
 
   return (
