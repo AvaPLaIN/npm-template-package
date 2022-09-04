@@ -3,6 +3,7 @@ import { ColumnRefType } from "./utils/createColumnRefs";
 
 interface TableProps {
   columns: ColumnRefType[];
+  checkable: boolean;
 }
 
 export const TableContainer = styled.div`
@@ -49,8 +50,8 @@ const TableWrapper = styled.table<TableProps>`
   overflow: auto;
   border-spacing: 0;
   display: grid;
-  grid-template-columns: ${({ columns }) => {
-    return columns
+  grid-template-columns: ${({ columns, checkable }) => {
+    let columnWidths = columns
       .map((column: ColumnRefType) => {
         if (typeof column.width.defaultWidth === "number") {
           return `${column.width.defaultWidth || 200}px`;
@@ -58,6 +59,10 @@ const TableWrapper = styled.table<TableProps>`
         return column.width.defaultWidth;
       })
       .join(" ");
+
+    if (checkable) columnWidths = "50px " + columnWidths;
+
+    return columnWidths;
   }};
   grid-auto-rows: minmax(auto, max-content);
 

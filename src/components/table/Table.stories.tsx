@@ -119,3 +119,9 @@ WithRowLimit.args = {
   ...defaultArgs,
   limit: 10,
 };
+
+export const Checkable = Template.bind({});
+Checkable.args = {
+  ...defaultArgs,
+  checkable: true,
+};

@@ -25,6 +25,7 @@ import {
   defaultRenderData,
 } from "./default-callbacks";
 import useOnChart from "./hooks/useOnChart";
+import useOnCheckbox from "./hooks/useOnCheckbox";
 import useOnFilter, { FilterType } from "./hooks/useOnFilter";
 import useOnResizeTable from "./hooks/useOnResizeTable";
 import useOnSelect from "./hooks/useOnSelect";
@@ -44,6 +45,7 @@ interface ITableProps<ColumnType, DataType> {
   limit?: number;
   rowGrouping?: boolean;
   selectable?: boolean;
+  checkable?: boolean;
   resizable?: boolean;
   contextMenu?: boolean;
   fetchDataOnPagination?: (
@@ -78,6 +80,7 @@ const Table = <
   renderData = defaultRenderData,
   limit = 15,
   rowGrouping = false,
+  checkable = false,
   selectable = false,
   contextMenu = false,
   resizable = true,
@@ -130,6 +133,8 @@ const Table = <
   });
 
   const { selectedRows, onSelect } = useOnSelect<DataType>();
+
+  const { checkedRows, onAddCheckedRow, onRemoveCheckedRow } = useOnCheckbox();
 
   const handleOnSort = useCallback(
     (column: string, type: string) => {
@@ -248,6 +253,12 @@ const Table = <
     handleOnCloseContextMenu();
   };
 
+  const onDeleteCheckedRows = () => {
+    setSortedData((sortedData) =>
+      sortedData.filter((data) => !checkedRows.includes(data.id))
+    );
+  };
+
   return (
     <>
       <GlobalStyles />
@@ -255,9 +266,10 @@ const Table = <
         {isChartOpen && (
           <Chart onCloseChart={onCloseChart} items={selectedRows} />
         )}
-        <TableWrapper ref={tableRef} columns={columnRefs}>
+        <TableWrapper ref={tableRef} columns={columnRefs} checkable={checkable}>
           <thead>
             <tr>
+              {checkable && <th></th>}
               {columnRefs.map((column, index) => (
                 <ColumnItem
                   key={columnKeyExtractor(column)}
@@ -301,6 +313,9 @@ const Table = <
                     contextMenu={contextMenu}
                     onContextMenu={handleOnContextMenu}
                     onSelect={onSelect}
+                    onAddCheckedRow={onAddCheckedRow}
+                    onRemoveCheckedRow={onRemoveCheckedRow}
+                    checkable={checkable}
                     renderData={renderData}
                     selected={selectedRows.some(
                       (selectedRow) => selectedRow.id === item.id
@@ -316,6 +331,12 @@ const Table = <
             </button>
             <button onClick={clearAllFilters} disabled={filters.length === 0}>
               Clear Filter
+            </button>
+            <button
+              onClick={onDeleteCheckedRows}
+              disabled={checkedRows.length === 0}
+            >
+              Delete Checked
             </button>
           </div>
           {pagination && (

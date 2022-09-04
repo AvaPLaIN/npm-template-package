@@ -1,4 +1,5 @@
 import React from "react";
+import Checkbox from "../checkbox/Checkbox";
 import RowContainer from "./Row.styles";
 
 interface IRowProps<DataType, ColumnType> {
@@ -6,6 +7,7 @@ interface IRowProps<DataType, ColumnType> {
   columns: ColumnType[];
   selectable: boolean;
   selected: boolean;
+  checkable: boolean;
   contextMenu: boolean;
   onContextMenu: (
     event: React.MouseEvent<HTMLDivElement>,
@@ -15,6 +17,8 @@ interface IRowProps<DataType, ColumnType> {
     event: React.MouseEvent<HTMLTableRowElement>,
     item: DataType
   ) => void;
+  onAddCheckedRow: (rowId: string) => void;
+  onRemoveCheckedRow: (rowId: string) => void;
   renderData: (item: DataType, column: ColumnType) => React.ReactNode;
 }
 
@@ -23,8 +27,11 @@ const Row = <DataType extends { id: string; [key: string]: any }, ColumnType>({
   columns,
   selectable,
   selected,
+  checkable,
   contextMenu,
   onSelect,
+  onAddCheckedRow,
+  onRemoveCheckedRow,
   onContextMenu,
   renderData,
 }: IRowProps<DataType, ColumnType>) => {
@@ -45,6 +52,15 @@ const Row = <DataType extends { id: string; [key: string]: any }, ColumnType>({
       }
       selected={selected}
     >
+      {checkable && (
+        <td>
+          <Checkbox
+            item={item}
+            onAddCheckedRow={onAddCheckedRow}
+            onRemoveCheckedRow={onRemoveCheckedRow}
+          />
+        </td>
+      )}
       {columns.map((column) => renderData(item, column))}
     </RowContainer>
   );
